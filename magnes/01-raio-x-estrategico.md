@@ -331,17 +331,18 @@ Criação de conteúdo, design, gestão, análise de mais de 1 rede social, nem 
 ```
 Estratégia digital para negócios de beleza e estética
 Do perfil bonito à marca que atrai clientes
-↓ START: o diagnóstico do teu Instagram
+↓ START: o diagnóstico do teu perfil
 Porto · online
 ```
 
 **Bio, opção B (com atitude):**
 ```
 O teu trabalho é bonito. O teu Instagram vende-o?
-Estratégia e comunicação para beleza e estética
-↓ Pede o teu START, o diagnóstico do teu perfil
-Porto · todo o país
+Estratégia digital para beleza e estética
+↓ Escreve START e recebe o teu diagnóstico
+Porto · online
 ```
+*(Ambas com 149 caracteres; o limite da bio é 150.)*
 
 **Link:** START (página ou formulário) · Falar connosco (WhatsApp) · Checklist gratuita.
 
