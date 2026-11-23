@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Recria uma base de dados local e aplica stub + migrações + testes.
 set -euo pipefail
-PSQL="psql -h ${PGHOST:-/tmp/claude-0} -p ${PGPORT:-5499} -U postgres -v ON_ERROR_STOP=1 -q"
+PSQL="psql -h ${PGHOST:-/var/run/postgresql} -p ${PGPORT:-5432} -U ${PGUSER:-postgres} -v ON_ERROR_STOP=1 -q"
 cd "$(dirname "$0")/.."
 $PSQL -d postgres -c "drop database if exists casa_test" -c "create database casa_test"
 $PSQL -d casa_test -f tests/00_supabase_stub.sql
