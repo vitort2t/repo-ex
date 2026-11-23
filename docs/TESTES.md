@@ -4,7 +4,7 @@
 
 | Conjunto | Como correr | O que cobre |
 |---|---|---|
-| Base de dados (44 verificações + 24 casos que têm de ser recusados) | `supabase/tests/run.sh` (PostgreSQL local) | Contas e perfis, casa, convites, permissões, movimentos, idempotência, stock negativo, lista automática, notificações, isolamento entre casas, confirmação de faturas, duplicados, orçamento, anulação, correção, validades (FEFO) |
+| Base de dados (44 verificações + 18 casos que têm de ser recusados) | `supabase/tests/run.sh` (PostgreSQL local) | Contas e perfis, casa, convites, permissões, movimentos, idempotência, stock negativo, lista automática, notificações, isolamento entre casas, confirmação de faturas, duplicados, orçamento, anulação, correção, validades (FEFO) |
 | Unitários (27) | `cd app && npm test` | Períodos e estatísticas por supermercado, associação de artigos ao inventário, saneamento do resultado da IA, conciliação, quantidade sugerida, CSV |
 | Renderização | build de produção + Playwright com backend simulado | Todos os ecrãs principais renderizam em iPhone 14 sem erros de JavaScript |
 
