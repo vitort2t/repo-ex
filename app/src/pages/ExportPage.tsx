@@ -62,7 +62,7 @@ export default function ExportPage() {
         <div className="card p-4 space-y-2">
           <p className="font-semibold">Tudo num ficheiro Excel</p>
           <p className="text-sm text-ink-muted">Inventário, movimentos, compras e artigos — também serve como cópia de segurança pessoal.</p>
-          <B k="all" label="Exportar tudo (Excel)" onClick={async () => exportXlsx(`casa-em-stock-${today}.xlsx`, [
+          <B k="all" label="Exportar tudo (Excel)" onClick={async () => exportXlsx(`lar-${today}.xlsx`, [
             { name: 'Inventário', rows: inventory() }, { name: 'Movimentos', rows: await movementsRows() },
             { name: 'Compras', rows: purchaseRows() }, { name: 'Artigos comprados', rows: await itemRows() }])} />
         </div>

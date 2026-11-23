@@ -143,11 +143,11 @@ function YearReport() {
           <div className="h-52 -ml-2">
             <ResponsiveContainer>
               <BarChart data={rows}>
-                <CartesianGrid stroke="#ECEAE3" vertical={false} />
-                <XAxis dataKey="label" tick={{ fontSize: 11, fill: '#8A8C83' }} tickLine={false} axisLine={false} />
-                <YAxis tick={{ fontSize: 11, fill: '#8A8C83' }} tickLine={false} axisLine={false} width={44} tickFormatter={(v) => `${Math.round(Number(v))}€`} />
-                <Tooltip cursor={{ fill: 'rgba(42,44,40,.05)' }} formatter={(v) => [money(Number(v)), 'Total']} />
-                <Bar isAnimationActive={false} dataKey="total" fill="#62805A" radius={[4, 4, 0, 0]} />
+                <CartesianGrid stroke="#ECE4DA" vertical={false} />
+                <XAxis dataKey="label" tick={{ fontSize: 11, fill: '#8B8F98' }} tickLine={false} axisLine={false} />
+                <YAxis tick={{ fontSize: 11, fill: '#8B8F98' }} tickLine={false} axisLine={false} width={44} tickFormatter={(v) => `${Math.round(Number(v))}€`} />
+                <Tooltip cursor={{ fill: 'rgba(20,38,61,.05)' }} formatter={(v) => [money(Number(v)), 'Total']} />
+                <Bar isAnimationActive={false} dataKey="total" fill="#14263D" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>

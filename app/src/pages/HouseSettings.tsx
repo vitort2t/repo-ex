@@ -30,8 +30,8 @@ export default function HouseSettings() {
 
   const share = async (token: string) => {
     const url = link(token)
-    const text = `Convite para a casa “${household.name}” na Casa em Stock: ${url}`
-    if (navigator.share) { try { await navigator.share({ title: 'Casa em Stock', text, url }); return } catch { /* cancelado */ } }
+    const text = `Convite para a casa “${household.name}” no LAR.: ${url}`
+    if (navigator.share) { try { await navigator.share({ title: 'LAR.', text, url }); return } catch { /* cancelado */ } }
     await navigator.clipboard.writeText(url)
     toast('Ligação copiada. Envie-a por mensagem.')
   }
@@ -76,10 +76,10 @@ export default function HouseSettings() {
           <div className="card divide-y divide-line/70">
             {members.map((m) => (
               <div key={m.user_id} className="flex items-center gap-3 px-4 py-3">
-                <span className="h-10 w-10 rounded-full bg-sage-50 text-sage-700 grid place-items-center font-bold">{(m.profile?.display_name || '?').charAt(0).toUpperCase()}</span>
+                <span className="h-10 w-10 rounded-full bg-navy-50 text-navy-700 grid place-items-center font-bold">{(m.profile?.display_name || '?').charAt(0).toUpperCase()}</span>
                 <div className="flex-1 min-w-0"><p className="font-medium truncate">{m.profile?.display_name}{m.user_id === user.id && ' (eu)'}</p><p className="text-xs text-ink-muted truncate">{m.profile?.email}</p></div>
                 {m.role === 'owner' ? <Badge tone="ok">Administrador</Badge> : (isOwner || m.user_id === user.id) &&
-                  <button aria-label="Remover" className="h-9 w-9 grid place-items-center rounded-full hover:bg-sand text-ink-muted" onClick={() => removeMember(m.user_id, m.profile?.display_name ?? 'membro')}><X size={17} /></button>}
+                  <button aria-label="Remover" className="h-9 w-9 grid place-items-center rounded-full hover:bg-champagne text-ink-muted" onClick={() => removeMember(m.user_id, m.profile?.display_name ?? 'membro')}><X size={17} /></button>}
               </div>
             ))}
           </div>
@@ -98,8 +98,8 @@ export default function HouseSettings() {
                 {pendingInvites.map((i) => (
                   <div key={i.id} className="flex items-center gap-2 px-4 py-3">
                     <div className="flex-1 min-w-0"><p className="font-medium truncate">{i.email}</p><p className="text-xs text-ink-muted">Válido até {fmtDate(i.expires_at)}</p></div>
-                    <button aria-label="Partilhar" className="h-9 w-9 grid place-items-center rounded-full hover:bg-sand" onClick={() => share(i.token)}>{'share' in navigator ? <Share2 size={17} /> : <Copy size={17} />}</button>
-                    <button aria-label="Cancelar convite" className="h-9 w-9 grid place-items-center rounded-full hover:bg-sand text-ink-muted" onClick={() => revoke(i.id)}><X size={17} /></button>
+                    <button aria-label="Partilhar" className="h-9 w-9 grid place-items-center rounded-full hover:bg-champagne" onClick={() => share(i.token)}>{'share' in navigator ? <Share2 size={17} /> : <Copy size={17} />}</button>
+                    <button aria-label="Cancelar convite" className="h-9 w-9 grid place-items-center rounded-full hover:bg-champagne text-ink-muted" onClick={() => revoke(i.id)}><X size={17} /></button>
                   </div>
                 ))}
               </div>

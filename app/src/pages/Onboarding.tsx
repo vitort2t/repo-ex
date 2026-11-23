@@ -62,7 +62,7 @@ export function AcceptInvite() {
   if (info === undefined) return <Loading />
   if (!info || !info.valid) return (
     <AuthLayout title="Convite inválido" subtitle="Este convite expirou, foi cancelado ou já foi usado. Peça um novo convite."
-      footer={<Link to="/" className="font-semibold text-sage-700">Continuar</Link>}><span /></AuthLayout>
+      footer={<Link to="/" className="font-semibold text-navy-700">Continuar</Link>}><span /></AuthLayout>
   )
   const accept = async () => {
     setBusy(true); setErr(null)

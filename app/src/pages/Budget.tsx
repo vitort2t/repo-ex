@@ -59,7 +59,7 @@ export default function Budget() {
             <div className="grid grid-cols-3 gap-2 text-center">
               <div><p className="text-lg font-bold tabular-nums">{money(current)}</p><p className="text-xs text-ink-muted">Orçamento</p></div>
               <div><p className="text-lg font-bold tabular-nums">{money(spent)}</p><p className="text-xs text-ink-muted">Gasto</p></div>
-              <div><p className={cx('text-lg font-bold tabular-nums', current - spent < 0 ? 'text-alert-ink' : 'text-sage-700')}>{money(current - spent)}</p><p className="text-xs text-ink-muted">Restante</p></div>
+              <div><p className={cx('text-lg font-bold tabular-nums', current - spent < 0 ? 'text-alert-ink' : 'text-ok-ink')}>{money(current - spent)}</p><p className="text-xs text-ink-muted">Restante</p></div>
             </div>
             <ProgressBar value={ratio} />
             <p className="text-sm text-center text-ink-soft">{percent(ratio)} utilizado</p>

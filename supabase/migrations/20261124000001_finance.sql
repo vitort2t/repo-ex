@@ -457,12 +457,15 @@ begin
     end if;
   end if;
 
+  perform public.fin_assert_same_household(p_household, 'fin_recurring', nullif(p_payload->>'recurring_id', '')::uuid);
   insert into public.fin_transactions(household_id, client_id, nature, direction, status, amount, currency, date, description,
-                                      category_id, account_id, person_id, beneficiary_id, scope, payment_method, notes, proof_path, created_by)
+                                      category_id, account_id, person_id, beneficiary_id, scope, payment_method, notes, proof_path,
+                                      recurring_id, source, created_by)
   values (p_household, p_client_id, case when v_type = 'income' then 'income' else 'expense' end,
           case when v_type = 'income' then 'in' else 'out' end, v_status, v_amount, v_cur, v_date, v_desc,
           v_cat, v_acc, v_person, v_benef, v_scope, nullif(btrim(p_payload->>'payment_method'), ''), p_payload->>'notes',
-          p_payload->>'proof_path', auth.uid())
+          p_payload->>'proof_path', nullif(p_payload->>'recurring_id', '')::uuid,
+          case when nullif(p_payload->>'recurring_id', '') is not null then 'recurring' else 'manual' end, auth.uid())
   returning * into v_row;
 
   if v_type = 'heitor' then

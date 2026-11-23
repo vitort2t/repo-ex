@@ -73,7 +73,7 @@ export function StoreDashboard({ purchases }: { purchases: Purchase[] }) {
         <div className="card p-4 space-y-3">
           <div className="flex items-center">
             <p className="font-semibold flex-1">Despesas por supermercado</p>
-            <div className="flex bg-sand rounded-lg p-0.5 text-xs font-semibold">
+            <div className="flex bg-champagne rounded-lg p-0.5 text-xs font-semibold">
               {(['chart', 'table'] as const).map((v) => <button key={v} onClick={() => setView(v)} className={cx('px-2.5 h-7 rounded-md', view === v ? 'bg-white shadow-card' : 'text-ink-muted')}>{v === 'chart' ? 'Gráfico' : 'Tabela'}</button>)}
             </div>
           </div>
@@ -99,7 +99,7 @@ export function StoreDashboard({ purchases }: { purchases: Purchase[] }) {
               <thead><tr className="text-left text-xs text-ink-muted"><th className="font-medium py-1">Supermercado</th><th className="font-medium text-right">Total</th><th className="font-medium text-right">%</th><th className="font-medium text-right">Compras</th><th className="font-medium text-right">Média</th></tr></thead>
               <tbody className="divide-y divide-line/70">
                 {stores.map((s) => (
-                  <tr key={s.key}><td className="py-2"><Link to={`/despesas/loja/${s.key}`} className="font-semibold text-sage-700">{s.label}</Link></td>
+                  <tr key={s.key}><td className="py-2"><Link to={`/despesas/loja/${s.key}`} className="font-semibold text-navy-700">{s.label}</Link></td>
                     <td className="text-right tabular-nums">{money(s.total)}</td><td className="text-right tabular-nums">{percent(s.share)}</td>
                     <td className="text-right tabular-nums">{s.count}</td><td className="text-right tabular-nums">{money(s.average)}</td></tr>
                 ))}
@@ -135,10 +135,10 @@ export function StoreDashboard({ purchases }: { purchases: Purchase[] }) {
           <div className="h-56 -ml-2">
             <ResponsiveContainer>
               <BarChart data={monthly} barCategoryGap="22%">
-                <CartesianGrid stroke="#ECEAE3" vertical={false} />
-                <XAxis dataKey="label" tick={{ fontSize: 11, fill: '#8A8C83' }} tickLine={false} axisLine={false} />
-                <YAxis tick={{ fontSize: 11, fill: '#8A8C83' }} tickLine={false} axisLine={false} width={44} tickFormatter={(v) => `${Math.round(Number(v))}€`} />
-                <Tooltip cursor={{ fill: 'rgba(42,44,40,.05)' }} content={<MonthTooltip />} />
+                <CartesianGrid stroke="#ECE4DA" vertical={false} />
+                <XAxis dataKey="label" tick={{ fontSize: 11, fill: '#8B8F98' }} tickLine={false} axisLine={false} />
+                <YAxis tick={{ fontSize: 11, fill: '#8B8F98' }} tickLine={false} axisLine={false} width={44} tickFormatter={(v) => `${Math.round(Number(v))}€`} />
+                <Tooltip cursor={{ fill: 'rgba(20,38,61,.05)' }} content={<MonthTooltip />} />
                 {chainsInEvo.map((s, i) => (
                   <Bar isAnimationActive={false} key={s.key} dataKey={s.key} stackId="a" fill={s.color} stroke="#fff" strokeWidth={2}
                        radius={i === chainsInEvo.length - 1 ? [4, 4, 0, 0] : 0} name={s.label} />
@@ -166,11 +166,12 @@ function Kpi({ label, value, sub }: { label: string; value: string; sub?: React.
   )
 }
 
-export function Change({ v, suffix, compact }: { v: number; suffix?: string; compact?: boolean }) {
-  // Gastar mais é desfavorável: tom de alerta; gastar menos: tom positivo.
+export function Change({ v, suffix, compact, goodWhenUp }: { v: number; suffix?: string; compact?: boolean; goodWhenUp?: boolean }) {
+  // Para despesas, gastar mais é desfavorável (alerta); para rendimentos/poupança é o contrário.
   const up = v > 0.0005, down = v < -0.0005
+  const good = goodWhenUp ? up : down, bad = goodWhenUp ? down : up
   return (
-    <span className={cx('inline-flex items-center gap-1 font-semibold tabular-nums', up && 'text-alert-ink', down && 'text-sage-700', !up && !down && 'text-ink-muted')}>
+    <span className={cx('inline-flex items-center gap-1 font-semibold tabular-nums', bad && 'text-alert-ink', good && 'text-ok-ink', !up && !down && 'text-ink-muted')}>
       {up ? <TrendingUp size={13} /> : down ? <TrendingDown size={13} /> : null}
       {up ? '+' : ''}{percent(v)}{!compact && suffix ? <span className="font-normal text-ink-muted"> {suffix}</span> : null}
     </span>

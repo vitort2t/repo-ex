@@ -75,7 +75,7 @@ export function MovementSheet({ product, direction: initial, onClose }: { produc
   return (
     <Sheet open onClose={onClose} title={product.name}
       footer={<div className="py-2">
-        <button className={cx('w-full', direction === 'in' ? 'btn-primary' : 'btn bg-ink text-white')} onClick={submit} disabled={record.isPending}>
+        <button className={cx('w-full', direction === 'in' ? 'btn-primary' : 'btn bg-navy-600 text-white')} onClick={submit} disabled={record.isPending}>
           {record.isPending ? <Spinner className="text-white" /> : direction === 'in' ? `Adicionar ${qty(amount)}` : `Retirar ${qty(amount)}`}
         </button>
       </div>}>
@@ -83,7 +83,7 @@ export function MovementSheet({ product, direction: initial, onClose }: { produc
                  options={[{ value: 'out', label: '− Retirar' }, { value: 'in', label: '+ Adicionar' }]} />
       <div className="flex items-baseline justify-between text-sm">
         <span className="text-ink-muted">Stock atual: <b className="text-ink">{qty(current)} {unitShort(product.unit)}</b></span>
-        <span className={cx('font-semibold', next < 0 ? 'text-alert-ink' : next <= Number(product.min_quantity) ? 'text-warn-ink' : 'text-sage-700')}>
+        <span className={cx('font-semibold', next < 0 ? 'text-alert-ink' : next <= Number(product.min_quantity) ? 'text-warn-ink' : 'text-ok-ink')}>
           Novo stock: {qty(next)}
         </span>
       </div>

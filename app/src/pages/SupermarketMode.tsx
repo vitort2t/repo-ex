@@ -27,7 +27,7 @@ export default function SupermarketMode() {
     <div className="min-h-screen bg-base">
       <header className="sticky top-0 z-20 bg-white/95 backdrop-blur border-b border-line pt-safe">
         <div className="flex items-center gap-3 px-4 h-16">
-          <button onClick={() => nav('/compras')} aria-label="Sair do modo supermercado" className="h-11 w-11 rounded-full bg-sand grid place-items-center"><X size={22} /></button>
+          <button onClick={() => nav('/compras')} aria-label="Sair do modo supermercado" className="h-11 w-11 rounded-full bg-champagne grid place-items-center"><X size={22} /></button>
           <div className="flex-1">
             <p className="font-bold text-lg leading-tight">Modo supermercado</p>
             <p className="text-sm text-ink-muted">{done.length} encontrados · faltam {todo.length}</p>
@@ -39,7 +39,7 @@ export default function SupermarketMode() {
       <main className="px-3 py-4 space-y-4 pb-safe">
         {todo.length === 0 && open.length > 0 && (
           <div className="card p-6 text-center space-y-3">
-            <CheckCircle2 size={44} className="mx-auto text-sage-600" />
+            <CheckCircle2 size={44} className="mx-auto text-navy-600" />
             <p className="font-bold text-lg">Tudo encontrado!</p>
             <p className="text-sm text-ink-muted">Quando chegar a casa, fotografe a fatura para atualizar o stock e as despesas.</p>
             <Link to="/faturas/nova" className="btn-primary w-full"><Receipt size={20} />Adicionar fatura</Link>

@@ -5,7 +5,7 @@ import { createStore, del, entries, set } from 'idb-keyval'
 import { supabase } from './supabase'
 import { errorCode, isNetworkError } from './errors'
 
-const store = createStore('casa-em-stock-outbox', 'ops')
+const store = createStore('lar-outbox', 'ops')
 
 export type MovementOp = {
   kind: 'movement'

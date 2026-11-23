@@ -1,15 +1,16 @@
 import type { StoreChain } from './types'
 
-// Paleta categórica validada (contraste e daltonismo) — a cor segue sempre o supermercado, nunca a posição.
+// Paleta derivada da identidade LAR. (azul profundo, vinho, ameixa, taupe). A cor segue sempre o supermercado,
+// nunca a posição. Como os tons da marca são suaves, os gráficos mostram sempre também o nome (legenda/rótulo).
 export const STORES: { key: StoreChain; label: string; color: string }[] = [
-  { key: 'mercadona',   label: 'Mercadona',   color: '#2a78d6' },
-  { key: 'auchan',      label: 'Auchan',      color: '#eb6834' },
-  { key: 'continente',  label: 'Continente',  color: '#1baf7a' },
-  { key: 'pingo_doce',  label: 'Pingo Doce',  color: '#eda100' },
-  { key: 'lidl',        label: 'Lidl',        color: '#e87ba4' },
-  { key: 'aldi',        label: 'Aldi',        color: '#008300' },
-  { key: 'intermarche', label: 'Intermarché', color: '#6250d6' },
-  { key: 'outros',      label: 'Outros',      color: '#e34948' },
+  { key: 'mercadona',   label: 'Mercadona',   color: '#14263D' },
+  { key: 'auchan',      label: 'Auchan',      color: '#C07A93' },
+  { key: 'continente',  label: 'Continente',  color: '#4F79A8' },
+  { key: 'pingo_doce',  label: 'Pingo Doce',  color: '#642C40' },
+  { key: 'lidl',        label: 'Lidl',        color: '#B3A07F' },
+  { key: 'aldi',        label: 'Aldi',        color: '#806071' },
+  { key: 'intermarche', label: 'Intermarché', color: '#7FA7C9' },
+  { key: 'outros',      label: 'Outros',      color: '#3B2A4F' },
 ]
 export const storeLabel = (k: StoreChain) => STORES.find((s) => s.key === k)?.label ?? 'Outros'
 export const storeColor = (k: StoreChain) => STORES.find((s) => s.key === k)?.color ?? '#A6A39A'

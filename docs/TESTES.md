@@ -1,11 +1,12 @@
-# Casa em Stock — Testes
+# LAR. — Testes
 
 ## Testes automáticos incluídos
 
 | Conjunto | Como correr | O que cobre |
 |---|---|---|
-| Base de dados (44 verificações + 18 casos que têm de ser recusados) | `supabase/tests/run.sh` (PostgreSQL local) | Contas e perfis, casa, convites, permissões, movimentos, idempotência, stock negativo, lista automática, notificações, isolamento entre casas, confirmação de faturas, duplicados, orçamento, anulação, correção, validades (FEFO) |
-| Unitários (27) | `cd app && npm test` | Períodos e estatísticas por supermercado, associação de artigos ao inventário, saneamento do resultado da IA, conciliação, quantidade sugerida, CSV |
+| Base de dados — inventário (44 verificações + 18 recusas) | `supabase/tests/run.sh` (PostgreSQL local) | Contas e perfis, casa, convites, permissões, movimentos, idempotência, stock negativo, lista automática, notificações, isolamento entre casas, confirmação de faturas, duplicados, orçamento, anulação, correção, validades (FEFO) |
+| Base de dados — finanças (47 verificações + 11 recusas) | `supabase/tests/run.sh` | Regras contabilísticas, transferências e poupança, cartão de crédito, Heitor (câmbio guardado), faturas sem duplicar, recorrências, orçamentos e alertas, objetivos, importação e duplicados, isolamento entre casas |
+| Unitários (41) | `cd app && npm test` | Períodos e estatísticas por supermercado, associação de artigos ao inventário, saneamento do resultado da IA, conciliação, quantidade sugerida, CSV |
 | Renderização | build de produção + Playwright com backend simulado | Todos os ecrãs principais renderizam em iPhone 14 sem erros de JavaScript |
 
 ## Os 20 testes obrigatórios — estado
@@ -46,3 +47,21 @@ Legenda: ✅ verificado nesta entrega · 🟡 lógica verificada; falta confirma
 7. Modo de avião no iPhone: retirar 1 iogurte → desligar o modo de avião → o movimento aparece no outro telemóvel.
 8. Despesas → Relatórios → exportar Excel.
 9. Despesas → abrir a compra → "Anular ou corrigir" → os gráficos deixam de a contar.
+
+## Módulo financeiro — estado
+
+| Funcionalidade | Estado |
+|---|---|
+| Entradas, saídas, previsto/pendente/realizado, confirmação | ✅ BD + ecrã |
+| Contas e saldos real/disponível/pendente/reservado/consolidado | ✅ BD + ecrã |
+| Transferências e poupança (sem contar como despesa) | ✅ BD |
+| Cartão de crédito sem dupla contagem | ✅ BD |
+| Heitor: EUR/BRL, taxa guardada, relatórios | ✅ BD + ecrã |
+| Faturas de supermercado nas despesas sem duplicar | ✅ BD |
+| Recorrências e alertas de vencimento | ✅ BD + ecrã |
+| Orçamentos (total/categoria/pessoa) e alertas 50/75/90/100% | ✅ BD + ecrã |
+| Objetivos | ✅ BD + ecrã |
+| Importação CSV | ✅ unitário + BD |
+| Importação PDF | ⏳ requer a chave da IA e um extrato real |
+| Relatórios Excel / PDF | 🟡 implementados; confirmar no dispositivo |
+| Tempo real entre os dois telemóveis | ⏳ requer o projeto Supabase ativo |

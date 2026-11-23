@@ -17,7 +17,7 @@ type AuthState = {
 }
 
 const Ctx = createContext<AuthState | null>(null)
-const HH_KEY = 'casa-em-stock-household'
+const HH_KEY = 'lar-household'
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<Session | null>(null)

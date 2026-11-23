@@ -15,15 +15,15 @@ export const queryClient = new QueryClient({
   },
 })
 
-const idb = createStore('casa-em-stock-cache', 'queries')
+const idb = createStore('lar-cache', 'queries')
 // Os dados carregados ficam guardados no dispositivo (IndexedDB) para consulta sem internet.
 export const persister = createAsyncStoragePersister({
   storage: { getItem: (k) => get(k, idb), setItem: (k, v) => set(k, v, idb), removeItem: (k) => del(k, idb) },
-  key: 'casa-em-stock-v1',
+  key: 'lar-v1',
   throttleTime: 1500,
 })
 
 export async function clearLocalCache() {
   queryClient.clear()
-  await del('casa-em-stock-v1', idb)
+  await del('lar-v1', idb)
 }

@@ -91,7 +91,7 @@ export default function ProductDetail() {
   return (
     <>
       <PageHeader title={product.name} subtitle={[product.brand, category?.name].filter(Boolean).join(' · ')} back
-        actions={<Link to={`/stock/${product.id}/editar`} aria-label="Editar" className="h-10 w-10 grid place-items-center rounded-full hover:bg-sand"><Pencil size={19} /></Link>} />
+        actions={<Link to={`/stock/${product.id}/editar`} aria-label="Editar" className="h-10 w-10 grid place-items-center rounded-full hover:bg-champagne"><Pencil size={19} /></Link>} />
       <Page>
         <div className="card p-5">
           <div className="flex items-center gap-4">
@@ -102,7 +102,7 @@ export default function ProductDetail() {
             </div>
           </div>
           <div className="grid grid-cols-2 gap-3 mt-5">
-            <button className="btn h-14 bg-ink text-white rounded-2xl text-base" onClick={() => setMove('out')}><Minus size={20} />Retirar</button>
+            <button className="btn h-14 bg-navy-600 text-white rounded-2xl text-base" onClick={() => setMove('out')}><Minus size={20} />Retirar</button>
             <button className="btn-primary h-14 rounded-2xl text-base" onClick={() => setMove('in')}><Plus size={20} />Adicionar</button>
           </div>
           <p className="text-xs text-ink-muted mt-3 text-center">Mínimo {qty(product.min_quantity)} · Ideal {qty(product.ideal_quantity)} {unitShort(product.unit)}</p>
@@ -110,7 +110,7 @@ export default function ProductDetail() {
 
         {!inList && !product.archived && (
           <button onClick={addToList} className="card w-full p-4 flex items-center gap-3 text-left">
-            <ShoppingCart size={19} className="text-sage-700" /><span className="flex-1 font-medium">Adicionar à lista de compras</span>
+            <ShoppingCart size={19} className="text-navy-700" /><span className="flex-1 font-medium">Adicionar à lista de compras</span>
             <span className="text-sm text-ink-muted">{qty(suggestedQuantity(product))} {unitShort(product.unit)}</span>
           </button>
         )}
@@ -154,11 +154,11 @@ export default function ProductDetail() {
                 <div className="h-44 -ml-3">
                   <ResponsiveContainer>
                     <LineChart data={prices.map((p) => ({ d: fmtDateShort(p.purchased_at), v: Number(p.unit_price), s: p.store_name }))}>
-                      <CartesianGrid stroke="#ECEAE3" vertical={false} />
-                      <XAxis dataKey="d" tick={{ fontSize: 11, fill: '#8A8C83' }} tickLine={false} axisLine={false} />
-                      <YAxis tick={{ fontSize: 11, fill: '#8A8C83' }} tickLine={false} axisLine={false} width={48} tickFormatter={(v) => `${Number(v).toFixed(2)}€`} domain={['auto', 'auto']} />
+                      <CartesianGrid stroke="#ECE4DA" vertical={false} />
+                      <XAxis dataKey="d" tick={{ fontSize: 11, fill: '#8B8F98' }} tickLine={false} axisLine={false} />
+                      <YAxis tick={{ fontSize: 11, fill: '#8B8F98' }} tickLine={false} axisLine={false} width={48} tickFormatter={(v) => `${Number(v).toFixed(2)}€`} domain={['auto', 'auto']} />
                       <Tooltip formatter={(v) => [money(Number(v)), 'Preço unitário']} labelFormatter={(l, p) => `${l} · ${p?.[0]?.payload?.s ?? ''}`} />
-                      <Line type="linear" dataKey="v" stroke="#62805A" strokeWidth={2} dot={{ r: 4, fill: '#62805A', stroke: '#fff', strokeWidth: 2 }} isAnimationActive={false} />
+                      <Line type="linear" dataKey="v" stroke="#14263D" strokeWidth={2} dot={{ r: 4, fill: '#14263D', stroke: '#fff', strokeWidth: 2 }} isAnimationActive={false} />
                     </LineChart>
                   </ResponsiveContainer>
                 </div>
@@ -169,7 +169,7 @@ export default function ProductDetail() {
                   <div className="space-y-1.5">
                     {byStore.map((s, i) => (
                       <div key={s.label} className="flex items-center gap-2 text-sm">
-                        <span className={cx('flex-1', i === 0 && 'font-semibold text-sage-700')}>{s.label}{i === 0 && ' · mais barato'}</span>
+                        <span className={cx('flex-1', i === 0 && 'font-semibold text-navy-700')}>{s.label}{i === 0 && ' · mais barato'}</span>
                         <span className="tabular-nums">{money(s.avg)}</span>
                         <span className="text-xs text-ink-muted w-16 text-right">{s.n} {s.n === 1 ? 'compra' : 'compras'}</span>
                       </div>
@@ -192,7 +192,7 @@ export default function ProductDetail() {
             <div className="card divide-y divide-line/70">
               {movements.map((m) => (
                 <div key={m.id} className="flex items-center gap-3 px-4 py-3">
-                  <span className={cx('h-9 w-9 rounded-xl grid place-items-center font-bold', m.direction === 'in' ? 'bg-sage-50 text-sage-700' : 'bg-sand text-ink-soft')}>{m.direction === 'in' ? '+' : '−'}</span>
+                  <span className={cx('h-9 w-9 rounded-xl grid place-items-center font-bold', m.direction === 'in' ? 'bg-navy-50 text-navy-700' : 'bg-champagne text-ink-soft')}>{m.direction === 'in' ? '+' : '−'}</span>
                   <div className="flex-1 min-w-0">
                     <p className="font-medium">{m.direction === 'in' ? '+' : '−'}{qty(m.quantity)} · {REASON_LABEL[m.reason] ?? m.reason}</p>
                     <p className="text-xs text-ink-muted truncate">{relativeDay(m.occurred_at)} · {who(m.user_id)}{m.note ? ` · ${m.note}` : ''}</p>

@@ -16,7 +16,7 @@ export function StockBadge({ product }: { product: Product }) {
 export function ProductThumb({ product, size = 44 }: { product: Product; size?: number }) {
   const { data: url } = useProductPhotoUrl(product.photo_path)
   return (
-    <div className="shrink-0 rounded-xl bg-sand grid place-items-center overflow-hidden text-ink-muted" style={{ width: size, height: size }}>
+    <div className="shrink-0 rounded-xl bg-champagne grid place-items-center overflow-hidden text-ink-muted" style={{ width: size, height: size }}>
       {url ? <img src={url} alt="" className="h-full w-full object-cover" /> : <Package size={size * 0.45} strokeWidth={1.6} />}
     </div>
   )
@@ -42,12 +42,12 @@ export function ProductRow({ product, category, location, onMove, expiresIn }: {
         </div>
       </Link>
       <div className="flex items-center gap-1.5 shrink-0">
-        <button aria-label={`Retirar ${product.name}`} onClick={() => onMove(product, 'out')} className="h-11 w-11 rounded-xl bg-sand grid place-items-center active:scale-95 text-ink"><Minus size={20} /></button>
+        <button aria-label={`Retirar ${product.name}`} onClick={() => onMove(product, 'out')} className="h-11 w-11 rounded-xl bg-champagne grid place-items-center active:scale-95 text-ink"><Minus size={20} /></button>
         <div className="w-12 text-center leading-tight">
           <p className={cx('text-lg font-bold tabular-nums', s === 'out' ? 'text-alert-ink' : s === 'low' ? 'text-warn-ink' : 'text-ink')}>{qty(product.quantity)}</p>
           <p className="text-[10px] text-ink-muted uppercase">{unitShort(product.unit)}</p>
         </div>
-        <button aria-label={`Adicionar ${product.name}`} onClick={() => onMove(product, 'in')} className="h-11 w-11 rounded-xl bg-sage-50 text-sage-700 grid place-items-center active:scale-95"><Plus size={20} /></button>
+        <button aria-label={`Adicionar ${product.name}`} onClick={() => onMove(product, 'in')} className="h-11 w-11 rounded-xl bg-navy-50 text-navy-700 grid place-items-center active:scale-95"><Plus size={20} /></button>
       </div>
     </div>
   )

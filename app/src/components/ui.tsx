@@ -12,7 +12,7 @@ export function PageHeader({ title, subtitle, back, actions }: { title: ReactNod
       <div className="flex items-center gap-2 px-4 h-14">
         {back && (
           <button aria-label="Voltar" onClick={() => (typeof back === 'string' ? nav(back) : nav(-1))}
-                  className="-ml-2 h-10 w-10 grid place-items-center rounded-full hover:bg-sand text-ink">
+                  className="-ml-2 h-10 w-10 grid place-items-center rounded-full hover:bg-champagne text-ink">
             <ChevronLeft size={24} />
           </button>
         )}
@@ -27,12 +27,12 @@ export function PageHeader({ title, subtitle, back, actions }: { title: ReactNod
 }
 
 export function Page({ children, className }: { children: ReactNode; className?: string }) {
-  return <main className={cx('px-4 pb-28 md:pb-10 space-y-4 animate-fade', className)}>{children}</main>
+  return <main className={cx('px-4 pb-44 md:pb-28 space-y-4 animate-fade', className)}>{children}</main>
 }
 
 // ---------------------------------------------------------------- elementos
 export function Spinner({ size = 20, className }: { size?: number; className?: string }) {
-  return <Loader2 size={size} className={cx('animate-spin text-sage-600', className)} aria-label="A carregar" />
+  return <Loader2 size={size} className={cx('animate-spin text-navy-600', className)} aria-label="A carregar" />
 }
 
 export function Loading({ label = 'A carregar…' }: { label?: string }) {
@@ -53,7 +53,7 @@ export function ErrorBox({ error, retry }: { error: unknown; retry?: () => void 
 export function EmptyState({ icon, title, text, action }: { icon?: ReactNode; title: string; text?: string; action?: ReactNode }) {
   return (
     <div className="card px-6 py-10 text-center flex flex-col items-center gap-2">
-      {icon && <div className="h-14 w-14 rounded-2xl bg-sand grid place-items-center text-ink-soft mb-1">{icon}</div>}
+      {icon && <div className="h-14 w-14 rounded-2xl bg-champagne grid place-items-center text-ink-soft mb-1">{icon}</div>}
       <p className="font-semibold">{title}</p>
       {text && <p className="text-sm text-ink-muted max-w-xs">{text}</p>}
       {action && <div className="mt-3">{action}</div>}
@@ -62,16 +62,16 @@ export function EmptyState({ icon, title, text, action }: { icon?: ReactNode; ti
 }
 
 export function Badge({ tone = 'neutral', children }: { tone?: 'neutral' | 'ok' | 'warn' | 'alert'; children: ReactNode }) {
-  const t = { neutral: 'bg-sand text-ink-soft', ok: 'bg-sage-50 text-sage-700', warn: 'bg-warn-bg text-warn-ink', alert: 'bg-alert-bg text-alert-ink' }[tone]
+  const t = { neutral: 'bg-champagne text-ink-soft', ok: 'bg-ok-bg text-ok-ink', warn: 'bg-warn-bg text-warn-ink', alert: 'bg-alert-bg text-alert-ink' }[tone]
   return <span className={cx('inline-flex items-center gap-1 rounded-full px-2.5 h-6 text-xs font-semibold whitespace-nowrap', t)}>{children}</span>
 }
 
 export function ProgressBar({ value, tone }: { value: number; tone?: 'ok' | 'warn' | 'alert' }) {
   const v = Math.max(0, Math.min(1, value))
   const t = tone ?? (value >= 1 ? 'alert' : value >= 0.75 ? 'warn' : 'ok')
-  const color = { ok: 'bg-sage-500', warn: 'bg-warn', alert: 'bg-alert' }[t]
+  const color = { ok: 'bg-ok', warn: 'bg-warn', alert: 'bg-alert' }[t]
   return (
-    <div className="h-2.5 rounded-full bg-sand overflow-hidden" role="progressbar" aria-valuenow={Math.round(v * 100)} aria-valuemin={0} aria-valuemax={100}>
+    <div className="h-2.5 rounded-full bg-champagne overflow-hidden" role="progressbar" aria-valuenow={Math.round(v * 100)} aria-valuemin={0} aria-valuemax={100}>
       <div className={cx('h-full rounded-full transition-all duration-500', color)} style={{ width: `${v * 100}%` }} />
     </div>
   )
@@ -89,7 +89,7 @@ export function Field({ label, hint, children, error }: { label: string; hint?: 
 
 export function Segmented<T extends string>({ value, onChange, options }: { value: T; onChange: (v: T) => void; options: { value: T; label: ReactNode }[] }) {
   return (
-    <div className="grid bg-sand rounded-xl p-1 gap-1" style={{ gridTemplateColumns: `repeat(${options.length}, minmax(0,1fr))` }}>
+    <div className="grid bg-champagne rounded-xl p-1 gap-1" style={{ gridTemplateColumns: `repeat(${options.length}, minmax(0,1fr))` }}>
       {options.map((o) => (
         <button key={o.value} type="button" onClick={() => onChange(o.value)}
                 className={cx('h-10 rounded-lg text-sm font-semibold transition', value === o.value ? 'bg-white shadow-card text-ink' : 'text-ink-muted')}>
@@ -127,11 +127,11 @@ export function Stepper({ value, onChange, step = 1, min = 0 }: { value: number;
   const set = (v: number) => onChange(Math.max(min, Math.round(v * 1000) / 1000))
   return (
     <div className="flex items-center gap-3">
-      <button type="button" aria-label="Diminuir" className="h-14 w-14 rounded-2xl bg-sand text-2xl font-semibold active:scale-95" onClick={() => set(value - step)}>−</button>
+      <button type="button" aria-label="Diminuir" className="h-14 w-14 rounded-2xl bg-champagne text-2xl font-semibold active:scale-95" onClick={() => set(value - step)}>−</button>
       <input className="input h-14 text-center text-2xl font-bold flex-1" inputMode="decimal" aria-label="Quantidade"
              value={String(value).replace('.', ',')}
              onChange={(e) => { const n = Number(e.target.value.replace(',', '.')); if (Number.isFinite(n)) set(n) }} />
-      <button type="button" aria-label="Aumentar" className="h-14 w-14 rounded-2xl bg-sand text-2xl font-semibold active:scale-95" onClick={() => set(value + step)}>+</button>
+      <button type="button" aria-label="Aumentar" className="h-14 w-14 rounded-2xl bg-champagne text-2xl font-semibold active:scale-95" onClick={() => set(value + step)}>+</button>
     </div>
   )
 }
@@ -155,7 +155,7 @@ export function Sheet({ open, onClose, title, children, footer }: { open: boolea
         <div className="pt-2.5 pb-1 flex justify-center md:hidden"><div className="h-1.5 w-10 rounded-full bg-line" /></div>
         <div className="flex items-center gap-3 px-5 pt-2 pb-3">
           <div className="flex-1 min-w-0 text-lg font-bold tracking-tight">{title}</div>
-          <button aria-label="Fechar" onClick={onClose} className="h-9 w-9 grid place-items-center rounded-full bg-sand text-ink-soft"><X size={18} /></button>
+          <button aria-label="Fechar" onClick={onClose} className="h-9 w-9 grid place-items-center rounded-full bg-champagne text-ink-soft"><X size={18} /></button>
         </div>
         <div className="overflow-y-auto px-5 pb-4 space-y-4">{children}</div>
         {footer && <div className="px-5 pt-2 pb-safe border-t border-line/70 bg-white rounded-b-3xl">{footer}</div>}
@@ -202,7 +202,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
       <div className="fixed z-[60] left-0 right-0 bottom-24 md:bottom-6 flex flex-col items-center gap-2 px-4 pointer-events-none" aria-live="polite">
         {toasts.map((t) => (
           <div key={t.id} className={cx('animate-pop pointer-events-auto max-w-md w-full rounded-2xl px-4 py-3 text-[15px] font-medium shadow-sheet',
-            t.tone === 'ok' && 'bg-ink text-white', t.tone === 'alert' && 'bg-alert text-white', t.tone === 'info' && 'bg-white text-ink border border-line')}>
+            t.tone === 'ok' && 'bg-navy-600 text-white', t.tone === 'alert' && 'bg-alert text-white', t.tone === 'info' && 'bg-white text-ink border border-line')}>
             {t.text}
           </div>
         ))}

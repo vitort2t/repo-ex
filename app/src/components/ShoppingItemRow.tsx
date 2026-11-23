@@ -18,7 +18,7 @@ export function ShoppingItemRow({ item, product, onToggle, onOpen, big }: {
     <div className={cx('flex items-center gap-3 px-4', big ? 'py-4' : 'py-3', item.checked && 'bg-base/60')}>
       <button onClick={onToggle} aria-label={item.checked ? 'Desmarcar' : 'Marcar como encontrado'}
               className={cx('shrink-0 rounded-full border-2 grid place-items-center transition active:scale-90',
-                big ? 'h-9 w-9' : 'h-7 w-7', item.checked ? 'bg-sage-600 border-sage-600 text-white' : 'border-ink-muted/50 bg-white')}>
+                big ? 'h-9 w-9' : 'h-7 w-7', item.checked ? 'bg-navy-600 border-navy-600 text-white' : 'border-ink-muted/50 bg-white')}>
         {item.checked && <Check size={big ? 20 : 16} strokeWidth={3} />}
       </button>
       <button onClick={onOpen ?? onToggle} className="flex-1 min-w-0 text-left">

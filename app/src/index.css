@@ -1,11 +1,11 @@
-@import '@fontsource-variable/plus-jakarta-sans';
+@import '@fontsource-variable/manrope';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root { color-scheme: light; -webkit-tap-highlight-color: transparent; }
-html, body { background: #FAFAF7; color: #2A2C28; }
-body { font-feature-settings: 'ss01', 'cv11'; -webkit-font-smoothing: antialiased; overscroll-behavior-y: none; }
+html, body { background: #FAF7F3; color: #18212E; }
+body {  -webkit-font-smoothing: antialiased; overscroll-behavior-y: none; }
 input, select, textarea, button { font: inherit; }
 /* iOS: evitar zoom automático nos campos (tamanho mínimo 16px) */
 input, select, textarea { font-size: 16px; }
@@ -13,14 +13,15 @@ input, select, textarea { font-size: 16px; }
 @layer components {
   .card { @apply bg-white rounded-2xl shadow-card border border-line/60; }
   .btn { @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 h-12 font-semibold transition active:scale-[.98] disabled:opacity-50 disabled:pointer-events-none select-none; }
-  .btn-primary { @apply btn bg-sage-600 text-white hover:bg-sage-700; }
-  .btn-secondary { @apply btn bg-sand text-ink hover:bg-sand-dark; }
-  .btn-ghost { @apply btn bg-transparent text-ink-soft hover:bg-sand; }
+  .btn-primary { @apply btn bg-navy-600 text-white hover:bg-navy-700; }
+  .btn-accent { @apply btn bg-wine-600 text-white hover:bg-wine-700; }
+  .btn-secondary { @apply btn bg-champagne text-ink hover:bg-champagne-dark; }
+  .btn-ghost { @apply btn bg-transparent text-ink-soft hover:bg-champagne; }
   .btn-danger { @apply btn bg-alert-bg text-alert-ink hover:bg-alert/20; }
-  .input { @apply w-full h-12 rounded-xl border border-line bg-white px-3.5 text-ink placeholder:text-ink-muted/70 outline-none focus:border-sage-500 focus:ring-4 focus:ring-sage-100 transition; }
+  .input { @apply w-full h-12 rounded-xl border border-line bg-white px-3.5 text-ink placeholder:text-ink-muted/70 outline-none focus:border-navy-500 focus:ring-4 focus:ring-navy-100 transition; }
   .label { @apply block text-[13px] font-medium text-ink-soft mb-1.5; }
   .chip { @apply inline-flex items-center gap-1.5 h-9 px-3.5 rounded-full text-sm font-medium border border-line bg-white text-ink-soft whitespace-nowrap transition; }
-  .chip-active { @apply bg-ink text-white border-ink; }
+  .chip-active { @apply bg-navy-600 text-white border-navy-600; }
   .section-title { @apply text-[13px] font-semibold uppercase tracking-wider text-ink-muted; }
 }
 
@@ -36,3 +37,9 @@ input, select, textarea { font-size: 16px; }
 .animate-fade { animation: fade-in .2s ease-out; }
 .animate-pop { animation: pop-in .22s ease-out; }
 @media (prefers-reduced-motion: reduce) { .animate-sheet, .animate-fade, .animate-pop { animation: none; } }
+
+@media print {
+  nav, aside, header button, .print\:hidden { display: none !important; }
+  body { background: #fff; }
+  .card { box-shadow: none; break-inside: avoid; }
+}

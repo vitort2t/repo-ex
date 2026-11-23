@@ -276,6 +276,14 @@ const TABLE_KEYS: Record<string, (h: string) => readonly unknown[]> = {
   locations: (h) => keys.locations(h),
   monthly_budgets: (h) => keys.budgets(h),
   household_members: (h) => keys.members(h),
+  fin_transactions: (h) => ['fin_txs', h],
+  fin_accounts: (h) => ['fin_accounts', h],
+  fin_categories: (h) => ['fin_categories', h],
+  fin_goals: (h) => ['fin_goals', h],
+  fin_recurring: (h) => ['fin_recurring', h],
+  fin_budgets: (h) => ['fin_budgets', h],
+  fin_people: (h) => ['fin_people', h],
+  fin_heitor_transfers: (h) => ['fin_heitor', h],
 }
 
 export type SyncStatus = 'connecting' | 'live' | 'offline'
@@ -292,6 +300,13 @@ export function useRealtimeSync(hid: string | undefined): SyncStatus {
         qc.invalidateQueries({ queryKey: TABLE_KEYS[table](hid) })
         // A lista automática muda quando o stock muda (inserções/remoções feitas pela base de dados).
         if (table === 'products') qc.invalidateQueries({ queryKey: keys.shopping(hid) })
+        // Saldos e progresso dos objetivos derivam dos movimentos.
+        if (table === 'fin_transactions' || table === 'fin_accounts' || table === 'purchases') {
+          qc.invalidateQueries({ queryKey: ['fin_balances', hid] })
+          qc.invalidateQueries({ queryKey: ['fin_goals', hid] })
+          qc.invalidateQueries({ queryKey: ['fin_txs', hid] })
+          qc.invalidateQueries({ queryKey: ['fin_budgets', hid] })
+        }
         if (table === 'purchases' || table === 'stock_movements') {
           qc.invalidateQueries({ queryKey: ['purchase_items', hid] })
           qc.invalidateQueries({ queryKey: ['prices', hid] })

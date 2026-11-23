@@ -22,7 +22,7 @@ export default function History() {
           <div className="card divide-y divide-line/70">
             {list.map((m) => (
               <Link key={m.id} to={`/stock/${m.product_id}`} className="flex items-center gap-3 px-4 py-3">
-                <span className={cx('h-9 w-9 shrink-0 rounded-xl grid place-items-center font-bold', m.direction === 'in' ? 'bg-sage-50 text-sage-700' : 'bg-sand text-ink-soft')}>{m.direction === 'in' ? '+' : '−'}</span>
+                <span className={cx('h-9 w-9 shrink-0 rounded-xl grid place-items-center font-bold', m.direction === 'in' ? 'bg-navy-50 text-navy-700' : 'bg-champagne text-ink-soft')}>{m.direction === 'in' ? '+' : '−'}</span>
                 <div className="flex-1 min-w-0">
                   <p className="font-medium truncate">{byId.get(m.product_id)?.name ?? 'Produto'}</p>
                   <p className="text-xs text-ink-muted truncate">{REASON_LABEL[m.reason]} · {who(m.user_id)} · {relativeDay(m.occurred_at)}</p>

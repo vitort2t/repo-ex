@@ -70,8 +70,8 @@ export default function Stock() {
     <>
       <PageHeader title="Stock" subtitle={`${counts.all} produtos`}
         actions={<>
-          <Link to="/stock/validades" aria-label="Validades" className="h-10 w-10 grid place-items-center rounded-full hover:bg-sand"><CalendarClock size={21} /></Link>
-          <Link to="/stock/novo" aria-label="Novo produto" className="h-10 w-10 grid place-items-center rounded-full bg-sage-600 text-white"><Plus size={22} /></Link>
+          <Link to="/stock/validades" aria-label="Validades" className="h-10 w-10 grid place-items-center rounded-full hover:bg-champagne"><CalendarClock size={21} /></Link>
+          <Link to="/stock/novo" aria-label="Novo produto" className="h-10 w-10 grid place-items-center rounded-full bg-navy-600 text-white"><Plus size={22} /></Link>
         </>} />
       <Page>
         <div className="flex gap-2">
@@ -83,7 +83,7 @@ export default function Stock() {
           </div>
           <button aria-label="Filtros" onClick={() => setShowFilters(true)} className={cx('relative h-12 w-12 rounded-xl border grid place-items-center', activeFilters ? 'bg-ink text-white border-ink' : 'bg-white border-line')}>
             <SlidersHorizontal size={19} />
-            {activeFilters > 0 && <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-sage-600 text-white text-[11px] grid place-items-center">{activeFilters}</span>}
+            {activeFilters > 0 && <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-navy-600 text-white text-[11px] grid place-items-center">{activeFilters}</span>}
           </button>
         </div>
         <Chips value={filter} onChange={setFilter} options={[

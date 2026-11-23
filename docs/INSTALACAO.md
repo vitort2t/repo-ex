@@ -1,4 +1,4 @@
-# Casa em Stock — Guia de instalação e publicação
+# LAR. — Guia de instalação e publicação
 
 Este guia leva a aplicação do código até um endereço próprio na internet, instalada no iPhone e partilhada com o Vitor.
 São precisos cerca de **30–45 minutos**. Não é preciso saber programar: basta copiar e colar.
@@ -37,6 +37,7 @@ A leitura de faturas é **opcional**: sem a chave da Anthropic, a aplicação fu
 3. Repita, **por esta ordem**, para:
    - `supabase/migrations/20261123000002_logic.sql`
    - `supabase/migrations/20261123000003_security.sql`
+   - `supabase/migrations/20261124000001_finance.sql` (módulo financeiro)
 4. Cada execução deve terminar com "Success. No rows returned".
 
 **Opção B — com a linha de comandos do Supabase:**
@@ -48,8 +49,8 @@ supabase link --project-ref <REF_DO_PROJETO>     # o REF está no URL do painel
 supabase db push
 ```
 
-O que fica criado: todas as tabelas, as regras de segurança (RLS) que isolam cada casa, as funções que atualizam
-o stock de forma transacional, os dois "baldes" privados de ficheiros (`receipts` e `product-photos`) e a
+O que fica criado: todas as tabelas (inventário e finanças), as regras de segurança (RLS) que isolam cada casa, as funções que atualizam
+o stock de forma transacional, os baldes privados de ficheiros (`receipts`, `product-photos` e `finance-docs`) e a
 sincronização em tempo real.
 
 ## 3. Configurar a autenticação
@@ -87,7 +88,10 @@ supabase secrets set ALLOWED_ORIGINS=https://casa-em-stock.vercel.app
 # opcional: escolher outro modelo (por omissão: claude-opus-5-5)
 # supabase secrets set RECEIPT_AI_MODEL=claude-haiku-5-5
 supabase functions deploy parse-receipt
+supabase functions deploy parse-statement      # leitura de extratos bancários em PDF
 ```
+
+Os extratos em **CSV** são lidos no próprio telemóvel e não precisam desta chave.
 
 A chave fica guardada nos segredos da Edge Function e nunca chega ao telemóvel.
 Para mudar de fornecedor de IA no futuro, basta implementar outro `ReceiptParser` em
@@ -118,11 +122,20 @@ Os dados estão no Supabase, por isso **atualizar a aplicação nunca apaga dado
 
 1. No Safari, com a aplicação aberta, toque em **Partilhar** (quadrado com seta).
 2. **Adicionar ao ecrã principal** → **Adicionar**.
-3. Abra a partir do ícone "Casa em Stock": abre em ecrã inteiro, como uma aplicação normal, e mantém a sessão.
+3. Abra a partir do ícone "LAR.": abre em ecrã inteiro, como uma aplicação normal, e mantém a sessão.
 
 No Android (Chrome): menu ⋮ → **Instalar aplicação**. No computador (Chrome/Edge): ícone de instalar na barra de endereço.
 
-## 9. Convidar o Vitor
+## 9. Configurar as finanças (5 minutos)
+
+1. **Finanças › As nossas contas**: crie a conta de cada um, a conta conjunta (se existir), o numerário, as poupanças e os cartões de crédito, com o saldo de hoje.
+2. **Finanças › Calendário**: registe as despesas fixas (renda, eletricidade, internet…) e os salários como recorrentes.
+3. **Finanças › Orçamento**: defina o orçamento total e os limites (alimentação, transportes, lazer, Heitor…).
+4. **Finanças › Os nossos objetivos**: crie, por exemplo, o fundo de emergência.
+5. O **Heitor** já existe como beneficiário (sem acesso à app). Registe envios no botão **+ Novo movimento**.
+6. As faturas de supermercado confirmadas aparecem automaticamente nas despesas (Alimentação › Supermercado), uma só vez.
+
+## 10. Convidar o Vitor
 
 1. Na aplicação: **Mais → A Nossa Casa → Convidar** → e-mail do Vitor → **Criar convite**.
 2. Envie a ligação (WhatsApp, SMS, e-mail) pela folha de partilha do iPhone.

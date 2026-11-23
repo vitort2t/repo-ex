@@ -211,9 +211,9 @@ export default function ReceiptReview() {
   return (
     <>
       <PageHeader title={manual ? 'Registar compra' : 'Rever fatura'} subtitle={manual ? 'Sem fatura' : status?.label} back
-        actions={<button onClick={discard} aria-label="Descartar" className="h-10 w-10 grid place-items-center rounded-full hover:bg-sand text-ink-soft"><Trash2 size={19} /></button>} />
+        actions={<button onClick={discard} aria-label="Descartar" className="h-10 w-10 grid place-items-center rounded-full hover:bg-champagne text-ink-soft"><Trash2 size={19} /></button>} />
       <Page>
-        {receipt?.status === 'processing' && <div className="card p-4 flex items-center gap-3"><Spinner />A fatura está a ser lida…<button className="ml-auto text-sm font-semibold text-sage-700" onClick={() => refetch()}>Atualizar</button></div>}
+        {receipt?.status === 'processing' && <div className="card p-4 flex items-center gap-3"><Spinner />A fatura está a ser lida…<button className="ml-auto text-sm font-semibold text-navy-700" onClick={() => refetch()}>Atualizar</button></div>}
         {receipt?.status === 'failed' && (
           <div className="card p-4 border-alert/30 bg-alert-bg/40 space-y-2">
             <p className="text-sm text-alert-ink font-medium">{receipt.error ?? 'Não foi possível ler a fatura automaticamente.'}</p>
@@ -227,7 +227,7 @@ export default function ReceiptReview() {
               <ChevronDown size={18} className={cx('transition', showFile && 'rotate-180')} />
             </button>
             {showFile && fileUrl && (receipt.mime_type === 'application/pdf'
-              ? <a href={fileUrl} target="_blank" rel="noreferrer" className="block px-4 pb-4 text-sm font-semibold text-sage-700">Abrir PDF</a>
+              ? <a href={fileUrl} target="_blank" rel="noreferrer" className="block px-4 pb-4 text-sm font-semibold text-navy-700">Abrir PDF</a>
               : <img src={fileUrl} alt="Fatura" className="w-full max-h-[70vh] object-contain bg-base" />)}
             {(receipt.status === 'parsed' || receipt.status === 'failed' || receipt.status === 'uploaded') && (
               <button onClick={reparse} disabled={reparsing} className="w-full flex items-center gap-2 px-4 py-3 border-t border-line/70 text-sm text-ink-soft">
@@ -288,7 +288,7 @@ export default function ReceiptReview() {
           {rec.globalDiscount > 0 && <Row label="Descontos globais" value={`− ${money(rec.globalDiscount)}`} />}
           <Row label="Total pago" value={money(rec.totalPaid)} bold />
           {rec.difference !== null && (rec.ok
-            ? <p className="text-sm text-sage-700 font-medium flex items-center gap-1.5 pt-1"><Check size={16} />Valores conciliados</p>
+            ? <p className="text-sm text-ok-ink font-medium flex items-center gap-1.5 pt-1"><Check size={16} />Valores conciliados</p>
             : <p className="text-sm text-warn-ink font-medium flex items-center gap-1.5 pt-1"><AlertTriangle size={16} />Diferença de {money(rec.difference)} — verifique os artigos</p>)}
         </section>
 
@@ -318,7 +318,7 @@ function LineCard({ line: l, product, categories, onChange, onPick, onRemove }: 
   return (
     <div className={cx('card overflow-hidden', !l.include && 'opacity-55')}>
       <div className="flex items-start gap-3 p-3.5">
-        <input type="checkbox" checked={l.include} onChange={(e) => onChange({ include: e.target.checked })} className="mt-1 h-5 w-5 accent-[#62805A]" aria-label="Incluir artigo" />
+        <input type="checkbox" checked={l.include} onChange={(e) => onChange({ include: e.target.checked })} className="mt-1 h-5 w-5 accent-[#14263D]" aria-label="Incluir artigo" />
         <button className="flex-1 min-w-0 text-left" onClick={() => onChange({ open: !l.open })}>
           <p className="font-semibold leading-snug">{l.name || l.raw_text || 'Novo artigo'}</p>
           {l.raw_text && l.raw_text !== l.name && <p className="text-xs text-ink-muted truncate">{l.raw_text}</p>}
@@ -355,7 +355,7 @@ function LineCard({ line: l, product, categories, onChange, onPick, onRemove }: 
           <p className="text-xs text-ink-muted -mt-1">“Valor” é o total pago pela linha, já com o desconto.</p>
           <div>
             <span className="label">Stock</span>
-            <div className="grid grid-cols-3 gap-1.5 bg-sand rounded-xl p-1">
+            <div className="grid grid-cols-3 gap-1.5 bg-champagne rounded-xl p-1">
               {(['existing', 'new', 'none'] as Mode[]).map((m) => (
                 <button key={m} type="button" onClick={() => (m === 'existing' ? onPick() : onChange({ mode: m, decided: true, product_id: m === 'none' ? l.product_id : null }))}
                   className={cx('h-9 rounded-lg text-[13px] font-semibold', l.mode === m ? 'bg-white shadow-card' : 'text-ink-muted')}>
@@ -364,7 +364,7 @@ function LineCard({ line: l, product, categories, onChange, onPick, onRemove }: 
               ))}
             </div>
           </div>
-          {l.mode === 'existing' && product && <button className="flex items-center gap-2 text-sm text-sage-700 font-semibold" onClick={onPick}><Search size={15} />{product.name} · trocar</button>}
+          {l.mode === 'existing' && product && <button className="flex items-center gap-2 text-sm text-navy-700 font-semibold" onClick={onPick}><Search size={15} />{product.name} · trocar</button>}
           {l.mode === 'new' && (
             <div className="grid grid-cols-2 gap-2">
               <div className="col-span-2"><Field label="Nome do novo produto"><input className="input" value={l.newName} onChange={(e) => onChange({ newName: e.target.value })} /></Field></div>

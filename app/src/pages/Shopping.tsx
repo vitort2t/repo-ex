@@ -112,7 +112,7 @@ export default function Shopping() {
 
         <form onSubmit={(e) => add(undefined, e)} className="relative">
           <input className="input pr-14" placeholder="Adicionar à lista…" value={text} onChange={(e) => setText(e.target.value)} enterKeyHint="done" />
-          <button className="absolute right-1.5 top-1.5 h-9 w-9 rounded-lg bg-sage-600 text-white grid place-items-center" aria-label="Adicionar" disabled={adding}>
+          <button className="absolute right-1.5 top-1.5 h-9 w-9 rounded-lg bg-navy-600 text-white grid place-items-center" aria-label="Adicionar" disabled={adding}>
             {adding ? <Spinner size={16} className="text-white" /> : <Plus size={20} />}
           </button>
           {suggestions.length > 0 && (
@@ -193,7 +193,7 @@ function EditItemSheet({ item, product, onClose, onRemove }: { item: ShoppingIte
       {product && <p className="text-sm text-ink-soft">Sugestão: comprar <b>{qty(suggestedQuantity(product))} {unitShort(product.unit)}</b> para chegar à quantidade ideal.</p>}
       <Field label="Quantidade a comprar"><NumberInput value={q} onChange={setQ} /></Field>
       <Field label="Nota (opcional)"><input className="input" value={note} onChange={(e) => setNote(e.target.value)} placeholder="Ex.: marca branca" /></Field>
-      {product && <Link to={`/stock/${product.id}`} className="block text-sm font-semibold text-sage-700">Ver ficha do produto</Link>}
+      {product && <Link to={`/stock/${product.id}`} className="block text-sm font-semibold text-navy-700">Ver ficha do produto</Link>}
     </Sheet>
   )
 }

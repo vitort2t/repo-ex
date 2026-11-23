@@ -49,7 +49,7 @@ export default function Taxonomy({ kind }: { kind: 'categories' | 'locations' })
     <div className="flex items-center gap-2 px-4 py-2.5">
       <button className="flex-1 text-left" onClick={() => rename(id, label)}>{label}</button>
       <span className="text-xs text-ink-muted">{products.filter((p) => !p.archived && (isCat ? p.category_id : p.location_id) === id).length}</span>
-      <button aria-label="Apagar" className="h-9 w-9 grid place-items-center rounded-full hover:bg-sand text-ink-muted" onClick={() => remove(id, label)}><Trash2 size={16} /></button>
+      <button aria-label="Apagar" className="h-9 w-9 grid place-items-center rounded-full hover:bg-champagne text-ink-muted" onClick={() => remove(id, label)}><Trash2 size={16} /></button>
     </div>
   )
 

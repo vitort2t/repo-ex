@@ -29,6 +29,16 @@ const History = lazy(() => import('./pages/History'))
 const ExportPage = lazy(() => import('./pages/ExportPage'))
 const Account = lazy(() => import('./pages/Account'))
 const Notifications = lazy(() => import('./pages/Notifications'))
+const Finance = lazy(() => import('./pages/finance/Finance'))
+const Movements = lazy(() => import('./pages/finance/Movements'))
+const Accounts = lazy(() => import('./pages/finance/Accounts'))
+const Heitor = lazy(() => import('./pages/finance/Heitor'))
+const FinCalendar = lazy(() => import('./pages/finance/Calendar'))
+const FinBudget = lazy(() => import('./pages/finance/FinBudget'))
+const Goals = lazy(() => import('./pages/finance/Goals'))
+const FinImport = lazy(() => import('./pages/finance/Import'))
+const FinReports = lazy(() => import('./pages/finance/FinReports'))
+const FinCategories = lazy(() => import('./pages/finance/FinCategories'))
 
 function RequireHousehold({ children }: { children: ReactNode }) {
   const { session, household, loading } = useAuth()
@@ -42,7 +52,7 @@ function RequireHousehold({ children }: { children: ReactNode }) {
 export default function App() {
   const { session, loading, recovery } = useAuth()
   if (!isConfigured) return <SetupNeeded />
-  if (loading) return <Loading label="A abrir a Casa em Stock…" />
+  if (loading) return <Loading label="A abrir o LAR.…" />
   if (recovery) return <ResetPassword />
 
   return (
@@ -79,6 +89,16 @@ export default function App() {
           <Route path="mais/exportar" element={<ExportPage />} />
           <Route path="mais/conta" element={<Account />} />
           <Route path="notificacoes" element={<Notifications />} />
+          <Route path="financas" element={<Finance />} />
+          <Route path="financas/movimentos" element={<Movements />} />
+          <Route path="financas/contas" element={<Accounts />} />
+          <Route path="financas/heitor" element={<Heitor />} />
+          <Route path="financas/calendario" element={<FinCalendar />} />
+          <Route path="financas/orcamento" element={<FinBudget />} />
+          <Route path="financas/objetivos" element={<Goals />} />
+          <Route path="financas/importar" element={<FinImport />} />
+          <Route path="financas/relatorios" element={<FinReports />} />
+          <Route path="financas/categorias" element={<FinCategories />} />
         </Route>
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

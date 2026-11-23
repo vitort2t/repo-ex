@@ -1,16 +1,19 @@
-import { AlertTriangle, Bell, Boxes, CalendarClock, ChevronRight, Receipt, Search, ShoppingCart, Wallet } from 'lucide-react'
+import { AlertTriangle, Bell, Boxes, CalendarClock, ChevronRight, Landmark, Receipt, Search, ShoppingCart, Wallet } from 'lucide-react'
 import { useMemo, type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import { useHousehold } from '@/hooks/auth'
 import { budgetForMonth, useBudgets, useLots, useNotifications, useProducts, usePurchases, useShopping } from '@/hooks/data'
+import { useBalances, useFinLookups, useTransactions } from '@/hooks/finance'
+import { consolidate, monthSummary } from '@/lib/finance'
 import { daysUntil, fmtDate, greeting, isoDate, money, percent, qty, unitShort } from '@/lib/format'
 import { stockState } from '@/lib/shopping'
 import { Badge, Page, ProgressBar, cx } from '@/components/ui'
+import { Logo } from '@/components/Logo'
 
 function Stat({ label, value, tone }: { label: string; value: ReactNode; tone?: 'warn' | 'alert' | 'ok' }) {
   return (
     <div className="rounded-xl bg-base px-3 py-2.5">
-      <p className={cx('text-xl font-bold tabular-nums', tone === 'warn' && 'text-warn-ink', tone === 'alert' && 'text-alert-ink', tone === 'ok' && 'text-sage-700')}>{value}</p>
+      <p className={cx('text-xl font-bold tabular-nums', tone === 'warn' && 'text-warn-ink', tone === 'alert' && 'text-alert-ink', tone === 'ok' && 'text-ok-ink')}>{value}</p>
       <p className="text-[11px] text-ink-muted font-medium leading-tight">{label}</p>
     </div>
   )
@@ -20,7 +23,7 @@ function CardLink({ to, icon, title, children }: { to: string; icon: ReactNode; 
   return (
     <Link to={to} className="card p-4 block active:scale-[.995] transition">
       <div className="flex items-center gap-2 mb-3">
-        <span className="h-8 w-8 rounded-lg bg-sage-50 text-sage-700 grid place-items-center">{icon}</span>
+        <span className="h-8 w-8 rounded-lg bg-navy-50 text-navy-700 grid place-items-center">{icon}</span>
         <p className="font-semibold flex-1">{title}</p>
         <ChevronRight size={18} className="text-ink-muted" />
       </div>
@@ -50,6 +53,11 @@ export default function Home() {
   const monthTotal = monthPurchases.reduce((s, p) => s + p.total_paid, 0)
   const budget = budgetForMonth(budgets, isoDate())
   const unread = notifications.filter((n) => !n.read).length
+  const { data: txs = [] } = useTransactions()
+  const { data: balances = [] } = useBalances()
+  const FL = useFinLookups()
+  const fin = monthSummary(txs, month, FL.catMap, FL.heitor?.id ?? null, FL.savingsAccounts)
+  const cons = consolidate(balances)
 
   const expiring = useMemo(() => {
     const byName = new Map(products.map((p) => [p.id, p]))
@@ -62,7 +70,8 @@ export default function Home() {
   return (
     <>
       <header className="pt-safe px-4">
-        <div className="flex items-start gap-3 pt-5 pb-4">
+        <div className="pt-4"><Logo size={26} /></div>
+        <div className="flex items-start gap-3 pt-4 pb-4">
           <div className="flex-1 min-w-0">
             <p className="text-sm text-ink-muted">{today.charAt(0).toUpperCase() + today.slice(1)}</p>
             <h1 className="text-[26px] font-bold tracking-tight leading-tight">{greeting()}{profile?.display_name ? `, ${profile.display_name}` : ''}</h1>
@@ -97,7 +106,16 @@ export default function Home() {
           {last && <p className="text-xs text-ink-muted mt-2">{last.store_name}</p>}
         </CardLink>
 
-        <CardLink to="/despesas" icon={<Wallet size={18} />} title="Despesas deste mês">
+        <CardLink to="/financas" icon={<Landmark size={18} />} title="Finanças da família">
+          <div className="grid grid-cols-3 gap-2">
+            <Stat label="Entradas" value={money(fin.income)} tone="ok" />
+            <Stat label="Saídas" value={money(fin.expenses)} />
+            <Stat label="Poupado" value={money(fin.saved)} />
+          </div>
+          <p className="text-xs text-ink-muted mt-2">Saldo do mês <b className="text-ink">{money(fin.net)}</b> · disponível nas contas <b className="text-ink">{money(cons.available)}</b></p>
+        </CardLink>
+
+        <CardLink to="/despesas" icon={<Wallet size={18} />} title="Supermercado este mês">
           <div className="flex items-end justify-between mb-2">
             <div>
               <p className="text-2xl font-bold tabular-nums">{money(monthTotal)}</p>
@@ -105,7 +123,7 @@ export default function Home() {
             </div>
             {budget !== null && (
               <div className="text-right">
-                <p className={cx('font-semibold tabular-nums', budget - monthTotal < 0 ? 'text-alert-ink' : 'text-sage-700')}>{money(budget - monthTotal)}</p>
+                <p className={cx('font-semibold tabular-nums', budget - monthTotal < 0 ? 'text-alert-ink' : 'text-ok-ink')}>{money(budget - monthTotal)}</p>
                 <p className="text-xs text-ink-muted">{budget - monthTotal < 0 ? 'acima do orçamento' : `disponível de ${money(budget)}`}</p>
               </div>
             )}
@@ -113,7 +131,7 @@ export default function Home() {
           {budget !== null ? <>
             <ProgressBar value={budget > 0 ? monthTotal / budget : 0} />
             <p className="text-xs text-ink-muted mt-1.5">{percent(budget > 0 ? monthTotal / budget : 0)} do orçamento utilizado</p>
-          </> : <p className="text-xs text-ink-muted">Sem orçamento definido · <span className="text-sage-700 font-semibold">definir</span></p>}
+          </> : <p className="text-xs text-ink-muted">Sem orçamento definido · <span className="text-navy-700 font-semibold">definir</span></p>}
         </CardLink>
 
         <section className="space-y-2">
@@ -142,7 +160,7 @@ export default function Home() {
                   <Badge tone={days < 0 ? 'alert' : 'warn'}>{days < 0 ? 'Expirado' : days === 0 ? 'Hoje' : `${days} dias`}</Badge>
                 </Link>
               ))}
-              {(out.length > 6 || low.length > 6) && <Link to="/compras" className="block px-4 py-3 text-sm font-semibold text-sage-700">Ver lista de compras</Link>}
+              {(out.length > 6 || low.length > 6) && <Link to="/compras" className="block px-4 py-3 text-sm font-semibold text-navy-700">Ver lista de compras</Link>}
             </div>
           )}
         </section>

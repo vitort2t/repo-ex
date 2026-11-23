@@ -7,7 +7,7 @@ import { Page, PageHeader, useConfirm } from '@/components/ui'
 function Item({ to, icon, label, sub }: { to: string; icon: ReactNode; label: string; sub?: string }) {
   return (
     <Link to={to} className="flex items-center gap-3 px-4 py-3.5">
-      <span className="h-9 w-9 rounded-xl bg-sand grid place-items-center text-ink-soft">{icon}</span>
+      <span className="h-9 w-9 rounded-xl bg-champagne grid place-items-center text-ink-soft">{icon}</span>
       <span className="flex-1"><span className="block font-medium">{label}</span>{sub && <span className="block text-xs text-ink-muted">{sub}</span>}</span>
       <ChevronRight size={18} className="text-ink-muted" />
     </Link>
@@ -41,7 +41,7 @@ export default function More() {
         <button className="btn-ghost w-full text-alert-ink" onClick={async () => { if (await confirm({ title: 'Terminar sessão?', confirm: 'Terminar sessão' })) signOut() }}>
           <LogOut size={18} />Terminar sessão
         </button>
-        <p className="text-center text-xs text-ink-muted">Casa em Stock · v{__APP_VERSION__}</p>
+        <p className="text-center text-xs text-ink-muted">LAR. · A vida da casa, em equilíbrio. · v{__APP_VERSION__}</p>
       </Page>
     </>
   )

@@ -108,7 +108,7 @@ export default function ProductForm() {
         <form onSubmit={submit} className="space-y-4">
           <div className="card p-4 space-y-4">
             <div className="flex items-center gap-4">
-              <label className="relative h-20 w-20 rounded-2xl bg-sand grid place-items-center overflow-hidden cursor-pointer shrink-0 text-ink-muted">
+              <label className="relative h-20 w-20 rounded-2xl bg-champagne grid place-items-center overflow-hidden cursor-pointer shrink-0 text-ink-muted">
                 {uploading ? <Spinner /> : photoUrl ? <img src={photoUrl} alt="" className="h-full w-full object-cover" /> : <Camera size={26} />}
                 <input type="file" accept="image/*" className="sr-only" onChange={(e) => e.target.files?.[0] && uploadPhoto(e.target.files[0])} />
               </label>
@@ -148,7 +148,7 @@ export default function ProductForm() {
               <Field label="Quantidade ideal" hint="Quanto gosta de ter."><NumberInput value={idealQ} onChange={setIdealQ} /></Field>
             </div>
             <label className="flex items-center gap-3 py-1">
-              <input type="checkbox" className="h-5 w-5 accent-[#62805A]" checked={autoRestock} onChange={(e) => setAutoRestock(e.target.checked)} />
+              <input type="checkbox" className="h-5 w-5 accent-[#14263D]" checked={autoRestock} onChange={(e) => setAutoRestock(e.target.checked)} />
               <span className="text-[15px]">Sugerir reposição automaticamente na lista de compras</span>
             </label>
           </div>

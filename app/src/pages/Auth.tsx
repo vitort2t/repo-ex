@@ -4,18 +4,13 @@ import { supabase } from '@/lib/supabase'
 import { friendlyError } from '@/lib/errors'
 import { useAuth } from '@/hooks/auth'
 import { Field, Spinner, useToast } from '@/components/ui'
+import { Logo } from '@/components/Logo'
 
 export function AuthLayout({ title, subtitle, children, footer }: { title: string; subtitle?: string; children: ReactNode; footer?: ReactNode }) {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-5 py-10 pt-safe">
       <div className="w-full max-w-sm animate-pop">
-        <div className="flex items-center gap-3 mb-8">
-          <img src="/favicon.svg" alt="" className="h-12 w-12 rounded-2xl shadow-card" />
-          <div>
-            <p className="font-bold text-lg tracking-tight leading-tight">Casa em Stock</p>
-            <p className="text-xs text-ink-muted">A despensa, as compras e as contas da casa</p>
-          </div>
-        </div>
+        <Logo size={44} slogan className="mb-10" />
         <h1 className="text-2xl font-bold tracking-tight">{title}</h1>
         {subtitle && <p className="text-ink-muted mt-1 text-[15px]">{subtitle}</p>}
         <div className="mt-6">{children}</div>
@@ -45,7 +40,7 @@ export function Login() {
   }
   return (
     <AuthLayout title="Entrar" subtitle="Bem-vindo de volta."
-      footer={<>Ainda não tem conta? <Link to="/criar-conta" className="font-semibold text-sage-700">Criar conta</Link></>}>
+      footer={<>Ainda não tem conta? <Link to="/criar-conta" className="font-semibold text-navy-700">Criar conta</Link></>}>
       <form onSubmit={submit} className="space-y-4">
         <Field label="E-mail"><input className="input" type="email" autoComplete="email" required value={email} onChange={(e) => setEmail(e.target.value)} /></Field>
         <Field label="Palavra-passe"><input className="input" type="password" autoComplete="current-password" required value={password} onChange={(e) => setPassword(e.target.value)} /></Field>
@@ -82,11 +77,11 @@ export function Signup() {
   }
   if (sent) return (
     <AuthLayout title="Confirme o seu e-mail" subtitle={`Enviámos uma ligação de confirmação para ${email}. Abra-a neste dispositivo para concluir.`}
-      footer={<Link to="/entrar" className="font-semibold text-sage-700">Voltar a entrar</Link>}><span /></AuthLayout>
+      footer={<Link to="/entrar" className="font-semibold text-navy-700">Voltar a entrar</Link>}><span /></AuthLayout>
   )
   return (
     <AuthLayout title="Criar conta" subtitle={invite ? 'Crie a sua conta para entrar na casa para onde foi convidado.' : 'Cada pessoa da casa tem a sua conta.'}
-      footer={<>Já tem conta? <Link to={invite ? `/entrar` : '/entrar'} state={invite ? { from: `/convite/${invite}` } : undefined} className="font-semibold text-sage-700">Entrar</Link></>}>
+      footer={<>Já tem conta? <Link to={invite ? `/entrar` : '/entrar'} state={invite ? { from: `/convite/${invite}` } : undefined} className="font-semibold text-navy-700">Entrar</Link></>}>
       <form onSubmit={submit} className="space-y-4">
         <Field label="O seu nome"><input className="input" autoComplete="given-name" required value={name} onChange={(e) => setName(e.target.value)} placeholder="Ex.: Vitor" /></Field>
         <Field label="E-mail"><input className="input" type="email" autoComplete="email" required value={email} onChange={(e) => setEmail(e.target.value)} /></Field>
@@ -112,7 +107,7 @@ export function ForgotPassword() {
   }
   return (
     <AuthLayout title="Recuperar palavra-passe" subtitle={sent ? 'Se existir uma conta com este e-mail, receberá uma ligação para definir uma nova palavra-passe.' : 'Indique o e-mail da sua conta.'}
-      footer={<Link to="/entrar" className="font-semibold text-sage-700">Voltar a entrar</Link>}>
+      footer={<Link to="/entrar" className="font-semibold text-navy-700">Voltar a entrar</Link>}>
       {!sent && (
         <form onSubmit={submit} className="space-y-4">
           <Field label="E-mail"><input className="input" type="email" required value={email} onChange={(e) => setEmail(e.target.value)} /></Field>
@@ -142,7 +137,7 @@ export function ResetPassword() {
   }
   if (!session) return (
     <AuthLayout title="Ligação inválida" subtitle="A ligação expirou ou já foi usada. Peça uma nova."
-      footer={<Link to="/recuperar" className="font-semibold text-sage-700">Pedir nova ligação</Link>}><span /></AuthLayout>
+      footer={<Link to="/recuperar" className="font-semibold text-navy-700">Pedir nova ligação</Link>}><span /></AuthLayout>
   )
   return (
     <AuthLayout title="Nova palavra-passe">

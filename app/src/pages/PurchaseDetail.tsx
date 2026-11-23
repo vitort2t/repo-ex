@@ -37,21 +37,21 @@ export default function PurchaseDetail() {
   return (
     <>
       <PageHeader title={p.store_name} subtitle={fmtDate(p.purchased_at)} back
-        actions={p.status === 'confirmed' && <button aria-label="Corrigir" onClick={() => setEditing(true)} className="h-10 w-10 grid place-items-center rounded-full hover:bg-sand"><Pencil size={19} /></button>} />
+        actions={p.status === 'confirmed' && <button aria-label="Corrigir" onClick={() => setEditing(true)} className="h-10 w-10 grid place-items-center rounded-full hover:bg-champagne"><Pencil size={19} /></button>} />
       <Page>
         {p.status === 'voided' && (
-          <div className="card p-4 bg-sand/60 text-sm"><b>Compra anulada</b>{p.void_reason ? ` — ${p.void_reason}` : ''}. Não conta nas despesas{p.voided_at ? ` (desde ${fmtDate(p.voided_at)})` : ''}.</div>
+          <div className="card p-4 bg-champagne/60 text-sm"><b>Compra anulada</b>{p.void_reason ? ` — ${p.void_reason}` : ''}. Não conta nas despesas{p.voided_at ? ` (desde ${fmtDate(p.voided_at)})` : ''}.</div>
         )}
         <div className="card p-5 text-center">
           <p className="text-[34px] font-bold tabular-nums">{money(p.total_paid)}</p>
           <p className="text-sm text-ink-muted">{storeLabel(p.store_chain)} · {items.length} artigos{p.payment_method ? ` · ${p.payment_method}` : ''}</p>
-          {p.discount_total > 0 && <p className="text-sm text-sage-700 mt-1">Descontos globais: {money(p.discount_total)}</p>}
+          {p.discount_total > 0 && <p className="text-sm text-navy-700 mt-1">Descontos globais: {money(p.discount_total)}</p>}
           <p className="text-xs text-ink-muted mt-2">Registada por {who(p.created_by)} · {relativeDay(p.created_at)}</p>
           {p.document_number && <p className="text-xs text-ink-muted">Documento: {p.document_number}</p>}
         </div>
 
         {receipt?.file_path && fileUrl && (
-          <a href={fileUrl} target="_blank" rel="noreferrer" className="card p-4 flex items-center gap-3"><FileText size={19} className="text-sage-700" /><span className="font-medium">Ver fatura original</span></a>
+          <a href={fileUrl} target="_blank" rel="noreferrer" className="card p-4 flex items-center gap-3"><FileText size={19} className="text-navy-700" /><span className="font-medium">Ver fatura original</span></a>
         )}
 
         <div className="card divide-y divide-line/70">
@@ -99,8 +99,8 @@ function VoidForm({ hasReceipt, onCancel, onConfirm }: { hasReceipt: boolean; on
     <div className="space-y-4">
       <p className="text-sm text-ink-soft">A compra deixa de contar nas despesas e nos gráficos. Fica no histórico como anulada.</p>
       <Field label="Motivo (opcional)"><input className="input" value={reason} onChange={(e) => setReason(e.target.value)} placeholder="Ex.: fatura duplicada, valores errados" /></Field>
-      <label className="flex items-start gap-3"><input type="checkbox" checked={revert} onChange={(e) => setRevert(e.target.checked)} className="mt-0.5 h-5 w-5 accent-[#62805A]" /><span className="text-[15px]">Retirar do stock as quantidades que esta compra adicionou</span></label>
-      {hasReceipt && <label className="flex items-start gap-3"><input type="checkbox" checked={reopen} onChange={(e) => setReopen(e.target.checked)} className="mt-0.5 h-5 w-5 accent-[#62805A]" /><span className="text-[15px]">Reabrir a fatura para corrigir os artigos e confirmar de novo</span></label>}
+      <label className="flex items-start gap-3"><input type="checkbox" checked={revert} onChange={(e) => setRevert(e.target.checked)} className="mt-0.5 h-5 w-5 accent-[#14263D]" /><span className="text-[15px]">Retirar do stock as quantidades que esta compra adicionou</span></label>
+      {hasReceipt && <label className="flex items-start gap-3"><input type="checkbox" checked={reopen} onChange={(e) => setReopen(e.target.checked)} className="mt-0.5 h-5 w-5 accent-[#14263D]" /><span className="text-[15px]">Reabrir a fatura para corrigir os artigos e confirmar de novo</span></label>}
       <div className="grid grid-cols-2 gap-3 pt-1">
         <button className="btn-secondary" onClick={onCancel}>Cancelar</button>
         <button className="btn bg-alert text-white" disabled={busy} onClick={async () => { setBusy(true); await onConfirm(reason, revert, reopen); setBusy(false) }}>{busy ? <Spinner className="text-white" /> : 'Anular compra'}</button>

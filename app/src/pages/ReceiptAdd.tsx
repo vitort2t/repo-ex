@@ -106,15 +106,15 @@ export default function ReceiptAdd() {
         ) : (
           <div className="space-y-3">
             <button className="card w-full p-5 flex items-center gap-4 text-left active:scale-[.99] transition" onClick={() => camera.current?.click()}>
-              <span className="h-12 w-12 rounded-2xl bg-sage-600 text-white grid place-items-center"><Camera size={24} /></span>
+              <span className="h-12 w-12 rounded-2xl bg-navy-600 text-white grid place-items-center"><Camera size={24} /></span>
               <span className="flex-1"><b className="block text-[17px]">Fotografar fatura</b><span className="text-sm text-ink-muted">Fotografe o talão inteiro, com boa luz</span></span>
             </button>
             <button className="card w-full p-5 flex items-center gap-4 text-left active:scale-[.99] transition" onClick={() => gallery.current?.click()}>
-              <span className="h-12 w-12 rounded-2xl bg-sand grid place-items-center"><ImageIcon size={24} /></span>
+              <span className="h-12 w-12 rounded-2xl bg-champagne grid place-items-center"><ImageIcon size={24} /></span>
               <span className="flex-1"><b className="block text-[17px]">Escolher da galeria</b><span className="text-sm text-ink-muted">Uma fotografia já tirada</span></span>
             </button>
             <button className="card w-full p-5 flex items-center gap-4 text-left active:scale-[.99] transition" onClick={() => pdf.current?.click()}>
-              <span className="h-12 w-12 rounded-2xl bg-sand grid place-items-center"><FileText size={24} /></span>
+              <span className="h-12 w-12 rounded-2xl bg-champagne grid place-items-center"><FileText size={24} /></span>
               <span className="flex-1"><b className="block text-[17px]">Anexar ficheiro PDF</b><span className="text-sm text-ink-muted">Fatura recebida por e-mail ou na app da loja</span></span>
             </button>
             <Link to="/faturas/manual" className="flex items-center gap-3 px-2 py-3 text-ink-soft">

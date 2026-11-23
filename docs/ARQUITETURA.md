@@ -1,4 +1,22 @@
-# Casa em Stock — Arquitetura
+# LAR. — Arquitetura
+
+> **LAR.** — *A vida da casa, em equilíbrio.* Plataforma privada de gestão doméstica e financeira da família.
+
+## Identidade visual
+
+| Cor | Hex | Uso |
+|---|---|---|
+| Azul profundo | `#14263D` | Estrutura: botões principais, navegação, entradas nos gráficos |
+| Vinho | `#642C40` | Personalidade: “+ Novo movimento”, saídas nos gráficos, destaques |
+| Ameixa | `#806071` | Complemento: Heitor, slogan |
+| Champanhe | `#F4EDE5` | Fundos secundários |
+| Taupe | `#CBB99F` | Detalhes subtis |
+| Branco | `#FFFFFF` | Cartões e superfícies |
+
+Verde, amarelo e vermelho só para estados (sucesso, atenção, alerta). Tipografia: Manrope.
+Logótipo oficial: casa em contorno linear com abertura no canto inferior esquerdo e quatro janelas 2 × 2
+(`app/src/components/Logo.tsx`; ficheiros em `docs/marca/`: a cores, monocromático para fundos claros e para fundos escuros).
+Ícone da app e favicon: só o símbolo.
 
 ## Tecnologias
 
@@ -72,6 +90,30 @@ Todas as tabelas têm UUID, `created_at`/`updated_at`, chaves estrangeiras e `ho
 - Segredos (chave da IA, service role) só nos segredos da Edge Function.
 - A Edge Function verifica a sessão, lê a fatura com as permissões do utilizador (RLS) e só depois escreve com a chave de serviço.
 
+## Módulo financeiro
+
+Tabelas: `fin_people` (Ana, Vitor e beneficiários como o Heitor), `fin_accounts`, `fin_categories` (categorias e subcategorias),
+`fin_transactions` (livro-razão único), `fin_heitor_transfers` (EUR, BRL, taxa aplicada, taxas), `fin_recurring`, `fin_budgets`,
+`fin_goals`, `fin_imports`. Vistas: `fin_account_balances`, `fin_goal_progress`.
+
+Regras contabilísticas (garantidas na base de dados e testadas em `supabase/tests/20_finance.sql`):
+
+1. Só contam valores **realizados**; previstos e pendentes aparecem à parte em todos os ecrãs e relatórios.
+2. **Transferências entre contas próprias** (incl. poupança e pagamento de cartão) são dois movimentos com o mesmo `transfer_group`,
+   natureza `transfer` — nunca rendimento nem despesa. Anular uma anula as duas pernas.
+3. **Cartão de crédito:** a compra é despesa na conta do cartão; o pagamento do cartão é transferência — nunca há dupla contagem.
+4. **Supermercado:** cada compra confirmada gera automaticamente **um** movimento (`purchase_id` único) em Alimentação › Supermercado;
+   corrigir/anular a compra atualiza/anula esse movimento.
+5. **Heitor:** cada envio é despesa (apoio familiar) = valor enviado + taxas; a taxa de câmbio efetiva fica guardada e nunca é recalculada.
+6. **Despesas partilhadas** são um único movimento, com quem pagou e o tipo (partilhada/individual).
+7. **Extratos** (CSV lido no telemóvel; PDF pela Edge Function `parse-statement`) são revistos antes de gravar; duplicados
+   (ex. a compra já registada pela fatura) são detetados e podem ser associados em vez de criados; transferências não são presumidas.
+8. Escrita nos movimentos só por funções transacionais (`fin_create_movement`, `fin_update_movement`, `fin_confirm_movement`,
+   `fin_cancel_movement`, `fin_import_movements`); todas as alterações às tabelas financeiras ficam no `audit_log` (antes/depois).
+
+Saldos: **real** (saldo inicial + realizados), **disponível** (contas à ordem − reservado − previsto/pendente do mês),
+**pendente**, **reservado** (valor marcado em cada conta + poupanças) e **consolidado** (EUR; BRL à parte).
+
 ## Sincronização e offline
 
 - Ao abrir, a app subscreve as alterações da casa (Realtime). Cada alteração invalida as consultas afetadas e o ecrã atualiza.
@@ -93,6 +135,8 @@ Todas as tabelas têm UUID, `created_at`/`updated_at`, chaves estrangeiras e `ho
 
 ## Limitações conhecidas
 
+- **Relatórios PDF** usam a impressão do sistema (“Guardar como PDF”), com layout de impressão próprio.
+- **Acesso bancário direto** não existe (exigiria integração oficial e consentimento); usa-se a importação de extratos.
 - **Notificações push** nos telemóveis não estão implementadas nesta versão (as notificações internas estão).
   No iPhone exigem iOS 16.4+, app instalada no ecrã inicial e um serviço de envio (Web Push com chaves VAPID) — é a próxima evolução natural.
 - Os alertas de validade são gerados quando alguém abre a app (não há tarefa agendada no servidor).
