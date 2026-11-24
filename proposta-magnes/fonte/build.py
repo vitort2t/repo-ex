@@ -214,7 +214,7 @@ P.append(f'''
   <div class="cv-top"><img class="cv-logo" src="img/logo-h-dark.png"><span class="cv-meta">PROPOSTA COMERCIAL<br><b>WEBSITE · CATÁLOGO DIGITAL</b></span></div>
   <div class="cv-title">
     <div class="cv-kicker">Proposta comercial</div>
-    <h1>Uma presença digital à altura do <span class="gold">teu negócio.</span></h1>
+    <h1>Uma presença digital à altura do <span class="lx gold">teu negócio.</span></h1>
     <p class="cv-sub">Proposta de criação de website comercial com catálogo digital e pedidos via WhatsApp.</p>
   </div>
   <div class="cv-phones">
@@ -241,7 +241,7 @@ P.append(f'''
   <div class="p2-grid">
     <div class="p2-text">
       {eyebrow("01", "A ideia")}
-      <h2>O teu negócio merece estar mais perto dos clientes.</h2>
+      <h2>O teu negócio merece estar mais perto dos <span class="lx">clientes.</span></h2>
       <p class="lead">Ter um espaço digital próprio permite apresentar os produtos de forma organizada, valorizar a marca e facilitar o contato com os clientes.</p>
       <p>A proposta é criar um <b>website personalizado</b>, onde os clientes poderão explorar o catálogo, escolher os produtos e encaminhar as suas encomendas diretamente pelo WhatsApp.</p>
     </div>
@@ -264,7 +264,7 @@ P.append(f'''
 <section class="page light">
   {page_head("03", "O website")}
   {eyebrow("02", "Como será o website")}
-  <h2 class="w80">Um espaço digital pensado para o teu negócio.</h2>
+  <h2 class="p3-h">Um espaço digital pensado para o <span class="lx gold">teu negócio</span> e feito para encantar os teus clientes.</h2>
   <div class="p3-stage">
     <div class="p3-bg"><div class="bigE e-stage">e</div></div>
     {laptop(.62, "position:absolute;left:4mm;top:9mm")}
@@ -288,7 +288,7 @@ P.append(f'''
 <section class="page light">
   {page_head("04", "Funcionalidades")}
   {eyebrow("03", "Funcionalidades")}
-  <h2 class="w85">Mais do que apresentar produtos: facilitar pedidos.</h2>
+  <h2 class="w85">Mais do que apresentar produtos: <span class="lx">facilitar pedidos.</span></h2>
   <div class="p4-band">
     <div class="bigE e-band">e</div>
     <div class="p4-ph"><div class="ph-cap"><b>Catálogo</b></div>{phone(screen_catalog(), .5)}</div>
@@ -323,7 +323,7 @@ P.append(f'''
   <div class="bigE e-left">e</div>
   {page_head("05", "Experiência")}
   {eyebrow("04", "Experiência de compra")}
-  <h2 class="w85">Uma jornada simples, do primeiro clique ao pedido.</h2>
+  <h2 class="w85">Uma <span class="lx">jornada simples</span>, do primeiro clique ao pedido.</h2>
   <p class="lead w80">A experiência será pensada <b>prioritariamente para celulares</b>, para um acesso rápido e confortável, onde quer que o cliente esteja.</p>
   <div class="p5-ill">{ILL}</div>
   <div class="steps">{st_html}</div>
@@ -344,7 +344,7 @@ P.append(f'''
     <img class="hd-logo" src="img/logo-h-dark.png">
     <div class="p6-side-in">
       {eyebrow("05", "Entregáveis", True)}
-      <h2 class="lt">Tudo o que precisas para começar.</h2>
+      <h2 class="lt"><span class="lx">Tudo o que precisas</span> para começar.</h2>
       <p class="lt-p">Um projeto completo, do planejamento à publicação, para o teu negócio ter um espaço digital pronto para receber pedidos.</p>
       <div class="p6-badge"><b>20</b><span>produtos iniciais<br>configurados</span></div>
     </div>
@@ -363,7 +363,7 @@ P.append(f'''
   <div class="bigE e-right2">e</div>
   {page_head("07", "Investimento")}
   {eyebrow("06", "Investimento")}
-  <h2 class="w80">Investimento no teu novo espaço digital.</h2>
+  <h2 class="w80"><span class="lx">Investimento</span> no teu novo espaço digital.</h2>
   <div class="price">
     <div class="bigE e-price">e</div>
     <div class="pr-l">
@@ -414,7 +414,7 @@ P.append(f'''
   <div class="p8-pattern"></div>
   {page_head("08", "Continuidade")}
   {eyebrow("07", "Continuidade")}
-  <h2 class="w80">Um website bem cuidado continua a trabalhar pelo teu negócio.</h2>
+  <h2 class="w85">Um website bem cuidado continua a trabalhar pelo <span class="lx gold">teu negócio.</span></h2>
   <div class="p8-grid">
     <div class="p8-text">
       <p class="lead">Depois da publicação, o website poderá continuar a evoluir com o negócio.</p>
@@ -437,7 +437,7 @@ P.append(f'''
   <div class="bigE e-close">e</div>
   <div class="cl-in">
     {eyebrow("08", "Próximo passo", True)}
-    <h1 class="cl-h">Vamos dar o<br><span class="gold">próximo passo?</span></h1>
+    <h1 class="cl-h">Vamos dar o<br><span class="lx gold">próximo passo?</span></h1>
     <p class="cl-p">O objetivo é criar um espaço digital que represente o teu negócio, valorize os teus produtos e torne o processo de encomenda mais simples para os teus clientes.</p>
     <p class="cl-p em">Será um prazer fazer parte desta evolução.</p>
     <div class="cta">
