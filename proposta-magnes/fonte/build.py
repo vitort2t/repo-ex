@@ -368,13 +368,13 @@ P.append(f'''
     <div class="bigE e-price">e</div>
     <div class="pr-l">
       <span class="pr-tag">Condição comercial especial para este projeto</span>
-      <div class="pr-v"><small>R$</small>870<small>,00</small></div>
+      <div class="pr-v"><small>R$</small>590<small>,00</small></div>
       <p>O valor inclui o desenvolvimento e a publicação do website, dentro do escopo apresentado nesta proposta.</p>
     </div>
     <div class="pr-r">
       <div class="pr-h">Condições de pagamento</div>
-      <div class="pay"><span class="pay-d"></span><div><b>50% na aprovação da proposta</b><span>R$ 435,00</span></div></div>
-      <div class="pay"><span class="pay-d"></span><div><b>50% antes da publicação final</b><span>R$ 435,00</span></div></div>
+      <div class="pay"><span class="pay-d"></span><div><b>50% na aprovação da proposta</b><span>R$ 295,00</span></div></div>
+      <div class="pay"><span class="pay-d"></span><div><b>50% antes da publicação final</b><span>R$ 295,00</span></div></div>
     </div>
   </div>
   <div class="terms">
@@ -396,10 +396,10 @@ P.append(f'''
   <div class="p7-note">{ic("shield",14,"#D8A44E")} Qualquer custo externo será comunicado previamente, antes de qualquer contratação.</div>
   <div class="tl-h">Como o projeto acontece</div>
   <div class="tl">
-    <div class="tl-s"><i></i><b>Aprovação</b><span>Proposta aprovada e 1ª parcela (R$ 435,00)</span></div>
+    <div class="tl-s"><i></i><b>Aprovação</b><span>Proposta aprovada e 1ª parcela (R$ 295,00)</span></div>
     <div class="tl-s"><i></i><b>Materiais</b><span>Envio de fotos, preços e informações</span></div>
     <div class="tl-s"><i></i><b>Desenvolvimento</b><span>Design, catálogo e até 2 rodadas de ajustes</span></div>
-    <div class="tl-s"><i></i><b>Publicação</b><span>2ª parcela (R$ 435,00) e link público no ar</span></div>
+    <div class="tl-s"><i></i><b>Publicação</b><span>2ª parcela (R$ 295,00) e link público no ar</span></div>
     <div class="tl-s"><i></i><b>Suporte</b><span>30 dias para correção de eventuais falhas</span></div>
   </div>
   {foot()}
@@ -426,7 +426,7 @@ P.append(f'''
   <div class="conts">{cont_html}</div>
   <div class="opt">
     <span class="opt-tag">Opcional</span>
-    <p>Serviço a contratar futuramente, se fizer sentido para o negócio, mediante orçamento ou plano mensal. <b>Não está incluído no investimento de R$ 870,00</b> apresentado nesta proposta.</p>
+    <p>Serviço a contratar futuramente, se fizer sentido para o negócio, mediante orçamento ou plano mensal. <b>Não está incluído no investimento de R$ 590,00</b> apresentado nesta proposta.</p>
   </div>
   {foot()}
 </section>''')
@@ -444,7 +444,7 @@ P.append(f'''
       <div class="cta-h">Como aprovar a proposta</div>
       <div class="cta-steps">
         <div><b>1</b><span>Confirma a aprovação pelo WhatsApp</span></div>
-        <div><b>2</b><span>Pagamento da primeira parcela de 50% (R$ 435,00)</span></div>
+        <div><b>2</b><span>Pagamento da primeira parcela de 50% (R$ 295,00)</span></div>
         <div><b>3</b><span>Envio dos materiais e início do projeto</span></div>
       </div>
       <div class="cta-btn">Aprovar proposta {ic("arrow",16,"#0D0D0D",2.2)}</div>
