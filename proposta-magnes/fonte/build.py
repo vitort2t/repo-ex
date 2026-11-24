@@ -53,16 +53,15 @@ def ic(name, size=16, color="currentColor", sw=1.8):
 
 # ---------------- Sabor da Casa mockup screens ----------------
 PRODUCTS = {
-    "brigadeiro": ("Brigadeiro gourmet", "Chocolate belga e granulado", "3,50"),
-    "bolochocolate": ("Bolo de chocolate", "Fatia com ganache", "12,00"),
-    "tortalimao": ("Torta de limão", "Merengue maçaricado", "14,00"),
-    "coxinha": ("Coxinha de frango", "Massa leve e crocante", "6,00"),
-    "paodequeijo": ("Pão de queijo", "Porção com 6 unidades", "10,00"),
-    "bolocenoura": ("Bolo de cenoura", "Cobertura de chocolate", "11,00"),
-    "brownie": ("Brownie", "Casquinha crocante", "8,00"),
-    "bolopote": ("Bolo de pote", "Chocolate com creme", "13,00"),
-    "cookie": ("Cookie artesanal", "Gotas de chocolate", "7,00"),
-    "empada": ("Empada de frango", "Massa amanteigada", "7,50"),
+    "mousse": ("Bolo mousse de chocolate", "Fatia com três camadas", "18,00"),
+    "fatias": ("Mini tortas sortidas", "Caixa com 6 unidades", "32,00"),
+    "donut": ("Donut recheado", "Cobertura de chocolate", "9,00"),
+    "passas": ("Bolo caseiro de passas", "Fatia generosa", "8,00"),
+    "frutas": ("Torta de frutas vermelhas", "Chantilly e amora", "15,00"),
+    "croissant": ("Croissant amanteigado", "Massa folhada artesanal", "9,50"),
+    "painchoc": ("Croissant de chocolate", "Recheio meio amargo", "11,00"),
+    "aniversario": ("Bolo de aniversário", "Sob encomenda · 1,5 kg", "120,00"),
+    "festa": ("Bolo confeitado", "Sob encomenda · 2 kg", "140,00"),
 }
 
 def statusbar(dark=False):
@@ -76,28 +75,28 @@ def topbar(title=None, back=False, cart=2):
     badge = f'<b class="badge">{cart}</b>' if cart else ''
     return f'<div class="tb">{left}{mid}<span class="tb-ic rel">{ic("bag",17)}{badge}</span></div>'
 
-def chips(active="Todos", items=("Todos", "Doces", "Salgados", "Bolos", "Tortas")):
+def chips(active="Todos", items=("Todos", "Bolos", "Tortas", "Folhados", "Donuts")):
     return '<div class="chips">' + "".join(f'<span class="chip{" on" if i==active else ""}">{i}</span>' for i in items) + '</div>'
 
 def pcard(key, added=False):
     n, d, p = PRODUCTS[key]
     btn = '<span class="addb on">✓ No carrinho</span>' if added else '<span class="addb">+ Adicionar</span>'
-    return (f'<div class="pc"><div class="pc-img"><img src="food/{key}.jpg"></div>'
+    return (f'<div class="pc"><div class="pc-img"><img src="photos/{key}.jpg"></div>'
             f'<div class="pc-b"><div class="pc-n">{n}</div><div class="pc-d">{d}</div>'
             f'<div class="pc-f"><span class="pc-p">R$ {p}</span>{btn}</div></div></div>')
 
 def screen_home():
     return (statusbar() + topbar() +
             '<div class="sc-pad">'
-            '<div class="hero"><img src="food/hero.jpg"><div class="hero-ov">'
+            '<div class="hero"><img src="photos/hero.jpg"><div class="hero-ov">'
             '<span class="hero-k">Feito em casa</span><div class="hero-t">Sabores que<br>abraçam.</div>'
             '<span class="btn-s">Ver cardápio</span></div></div>'
             '<div class="sec-h"><span>Categorias</span><a>ver todas</a></div>'
             '<div class="cats">'
-            + "".join(f'<div class="cat"><div class="cat-i"><img src="food/{k}.jpg"></div><span>{n}</span></div>'
-                      for k, n in [("brigadeiro", "Doces"), ("coxinha", "Salgados"), ("bolochocolate", "Bolos"), ("tortalimao", "Tortas")]) +
+            + "".join(f'<div class="cat"><div class="cat-i"><img src="photos/{k}.jpg"></div><span>{n}</span></div>'
+                      for k, n in [("mousse", "Bolos"), ("frutas", "Tortas"), ("croissant", "Folhados"), ("donut", "Donuts")]) +
             '</div><div class="sec-h"><span>Mais pedidos</span><a>ver todos</a></div>'
-            '<div class="grid2">' + pcard("brigadeiro") + pcard("bolocenoura") + '</div>'
+            '<div class="grid2">' + pcard("mousse") + pcard("passas") + '</div>'
             '</div>' + navbar(0))
 
 def navbar(active=0):
@@ -109,16 +108,16 @@ def screen_catalog():
     return (statusbar() + topbar("Cardápio") +
             '<div class="sc-pad">'
             f'<div class="search">{ic("search",13,"#9a8576")}<span>Buscar no cardápio</span></div>'
-            + chips("Doces") +
-            '<div class="grid2">' + pcard("brigadeiro", True) + pcard("brownie") + pcard("tortalimao") + pcard("bolopote", True) + pcard("cookie") + pcard("bolochocolate") + '</div>'
+            + chips("Todos") +
+            '<div class="grid2">' + pcard("donut", True) + pcard("croissant") + pcard("frutas") + pcard("painchoc", True) + pcard("aniversario") + pcard("mousse") + '</div>'
             '</div>' + navbar(1))
 
 def screen_categories():
-    tiles = [("brigadeiro", "Doces", "12 itens"), ("coxinha", "Salgados", "9 itens"), ("bolochocolate", "Bolos", "6 itens"),
-             ("tortalimao", "Tortas", "4 itens"), ("bolopote", "Bolos de pote", "5 itens"), ("paodequeijo", "Para o café", "7 itens")]
+    tiles = [("mousse", "Bolos", "8 itens"), ("frutas", "Tortas", "5 itens"), ("croissant", "Folhados", "6 itens"),
+             ("donut", "Donuts", "4 itens"), ("fatias", "Mini tortas", "7 itens"), ("festa", "Bolos de festa", "sob encomenda")]
     return (statusbar() + topbar("Categorias") +
             '<div class="sc-pad"><div class="cat-intro">O que vai ser hoje?</div><div class="tiles">' +
-            "".join(f'<div class="tile{" on" if i==1 else ""}"><img src="food/{k}.jpg"><div class="tile-l"><b>{n}</b><span>{c}</span></div></div>'
+            "".join(f'<div class="tile{" on" if i==1 else ""}"><img src="photos/{k}.jpg"><div class="tile-l"><b>{n}</b><span>{c}</span></div></div>'
                     for i, (k, n, c) in enumerate(tiles)) +
             '</div></div>' + navbar(1))
 
@@ -126,16 +125,16 @@ def cart_item(key, q):
     n, d, p = PRODUCTS[key]
     v = float(p.replace(",", ".")) * q
     vs = f"{v:.2f}".replace(".", ",")
-    return (f'<div class="ci"><div class="ci-img"><img src="food/{key}.jpg"></div><div class="ci-b"><div class="ci-n">{n}</div>'
+    return (f'<div class="ci"><div class="ci-img"><img src="photos/{key}.jpg"></div><div class="ci-b"><div class="ci-n">{n}</div>'
             f'<div class="ci-d">R$ {p} / un.</div><div class="ci-f"><span class="qty"><i>−</i><b>{q}</b><i>+</i></span><span class="ci-p">R$ {vs}</span></div></div></div>')
 
 def screen_cart():
     return (statusbar() + topbar("Meu carrinho", back=True, cart=4) +
             '<div class="sc-pad">'
-            + cart_item("brigadeiro", 12) + cart_item("bolopote", 2) + cart_item("coxinha", 6) + cart_item("bolocenoura", 1) +
-            '<div class="sum"><div><span>Subtotal (4 itens)</span><span>R$ 115,00</span></div>'
+            + cart_item("donut", 4) + cart_item("painchoc", 2) + cart_item("croissant", 2) + cart_item("mousse", 1) +
+            '<div class="sum"><div><span>Subtotal (4 itens)</span><span>R$ 95,00</span></div>'
             '<div class="muted"><span>Entrega ou retirada</span><span>na próxima etapa</span></div>'
-            '<div class="tot"><span>Total</span><span>R$ 115,00</span></div></div>'
+            '<div class="tot"><span>Total</span><span>R$ 95,00</span></div></div>'
             '<div class="btn-p">Continuar pedido</div>'
             f'<div class="saved">{ic("save",11,"#8b6a52")} Carrinho guardado neste aparelho</div>'
             '</div>')
@@ -150,11 +149,11 @@ def screen_checkout():
             f'<div class="field">{ic("pin",12,"#a08b7c")}<span>Endereço de entrega</span></div>'
             '<div class="field tall"><span>Observações (opcional)</span></div>'
             '<div class="lbl">Resumo</div>'
-            '<div class="sum compact"><div><span>12× Brigadeiro gourmet</span><span>R$ 42,00</span></div>'
-            '<div><span>2× Bolo de pote</span><span>R$ 26,00</span></div>'
-            '<div><span>6× Coxinha de frango</span><span>R$ 36,00</span></div>'
-            '<div><span>1× Bolo de cenoura</span><span>R$ 11,00</span></div>'
-            '<div class="tot"><span>Total</span><span>R$ 115,00</span></div></div>'
+            '<div class="sum compact"><div><span>4× Donut recheado</span><span>R$ 36,00</span></div>'
+            '<div><span>2× Croissant de chocolate</span><span>R$ 22,00</span></div>'
+            '<div><span>2× Croissant amanteigado</span><span>R$ 19,00</span></div>'
+            '<div><span>1× Bolo mousse de chocolate</span><span>R$ 18,00</span></div>'
+            '<div class="tot"><span>Total</span><span>R$ 95,00</span></div></div>'
             f'<div class="btn-wa">{ic("chat",15,"#fff",2)} Enviar pedido pelo WhatsApp</div>'
             '<div class="wa-note">Você revisa a mensagem e confirma o envio no WhatsApp.</div>'
             '</div>')
@@ -167,8 +166,8 @@ def screen_whats():
             '</div>'
             '<div class="wa-input"><div class="wa-msg">'
             '<b>Olá! Gostaria de fazer um pedido:</b><br>'
-            '• 12× Brigadeiro gourmet — R$ 42,00<br>• 2× Bolo de pote — R$ 26,00<br>• 6× Coxinha de frango — R$ 36,00<br>• 1× Bolo de cenoura — R$ 11,00<br>'
-            '<b>Total: R$ 115,00</b><br>Forma: <b>Entrega</b><br>Nome: Maria S.<br>Endereço: Rua das Flores, 120'
+            '• 4× Donut recheado — R$ 36,00<br>• 2× Croissant de chocolate — R$ 22,00<br>• 2× Croissant amanteigado — R$ 19,00<br>• 1× Bolo mousse de chocolate — R$ 18,00<br>'
+            '<b>Total: R$ 95,00</b><br>Forma: <b>Entrega</b><br>Nome: Maria S.<br>Endereço: Rua das Flores, 120'
             f'</div><span class="wa-send">{ic("send",15,"#fff",2)}</span></div>')
 
 def phone(content, zoom=1.0, cls="", style=""):
@@ -176,21 +175,21 @@ def phone(content, zoom=1.0, cls="", style=""):
             f'<div class="ph-notch"></div></div></div>')
 
 def screen_desktop():
-    prods = ["brigadeiro", "bolochocolate", "tortalimao", "coxinha"]
+    prods = ["mousse", "frutas", "donut", "croissant"]
     return (f'<div class="d-nav"><span class="sdc-logo">Sabor <em>da</em> Casa</span>'
             '<span class="d-links"><b>Início</b><span>Cardápio</span><span>Encomendas</span><span>Sobre nós</span><span>Contato</span></span>'
             f'<span class="d-cart">{ic("bag",15)} Carrinho <b>2</b></span></div>'
             '<div class="d-hero"><div class="d-hero-t"><span class="hero-k dk">Feito em casa, todos os dias</span>'
             '<div class="d-h1">Sabores que<br>abraçam.</div>'
-            '<p>Doces, salgados e bolos preparados com carinho. Escolha no cardápio e faça seu pedido pelo WhatsApp.</p>'
+            '<p>Bolos, tortas e folhados preparados com carinho. Escolha no cardápio e faça seu pedido pelo WhatsApp.</p>'
             '<span class="d-btns"><span class="btn-p sm">Ver cardápio</span><span class="btn-o sm">Como pedir</span></span></div>'
-            '<div class="d-hero-i"><img src="food/hero2.jpg"></div></div>'
-            '<div class="d-sec"><span class="d-sec-t">Mais pedidos</span>' + chips("Todos", ("Todos", "Doces", "Salgados", "Bolos", "Tortas", "Bolos de pote")) + '</div>'
+            '<div class="d-hero-i"><img src="photos/hero2.jpg"></div></div>'
+            '<div class="d-sec"><span class="d-sec-t">Mais pedidos</span>' + chips("Todos", ("Todos", "Bolos", "Tortas", "Folhados", "Donuts", "Bolos de festa")) + '</div>'
             '<div class="d-grid">' + "".join(pcard(k) for k in prods) + '</div>')
 
 def laptop(zoom=1.0, style=""):
     return (f'<div class="laptop" style="zoom:{zoom};{style}"><div class="lp-lid"><div class="lp-cam"></div><div class="lp-screen">'
-            '<div class="br-bar"><i></i><i></i><i></i><span class="br-url">saboresdacasa.com.br</span></div>'
+            '<div class="br-bar"><i></i><i></i><i></i><span class="br-url">seusite.com.br</span></div>'
             f'<div class="lp-site">{screen_desktop()}</div></div></div><div class="lp-base"><div class="lp-notch"></div></div></div>')
 
 # ---------------- MAGNES page chrome ----------------
@@ -241,7 +240,7 @@ P.append(f'''
       <p>A proposta é criar um <b>website personalizado</b>, onde os clientes poderão explorar o catálogo, escolher os produtos e encaminhar as suas encomendas diretamente pelo WhatsApp.</p>
     </div>
     <div class="p2-visual">
-      <div class="arch"><img src="food/hero_v.jpg"></div>
+      <div class="arch"><img src="photos/hero_v.jpg"></div>
       <div class="p2-phone">{phone(screen_categories(), .62)}</div>
       <div class="p2-ill">{ILL}</div>
     </div>
@@ -270,7 +269,7 @@ P.append(f'''
   <div class="p3-list">
     <div class="li">{ic("home",20,"#D8A44E")}<div><h5>Página inicial</h5><p>Apresentação do negócio, com destaque para o que há de melhor.</p></div></div>
     <div class="li">{ic("grid",20,"#D8A44E")}<div><h5>Catálogo digital</h5><p>Todos os produtos reunidos num só lugar, sempre à mão.</p></div></div>
-    <div class="li">{ic("touch",20,"#D8A44E")}<div><h5>Categorias interativas</h5><p>Doces, salgados, bolos… o cliente encontra tudo com um toque.</p></div></div>
+    <div class="li">{ic("touch",20,"#D8A44E")}<div><h5>Categorias interativas</h5><p>Bolos, tortas, folhados… o cliente encontra tudo com um toque.</p></div></div>
     <div class="li">{ic("photo",20,"#D8A44E")}<div><h5>Fotos, descrições e preços</h5><p>Informação clara para o cliente decidir com confiança.</p></div></div>
     <div class="li">{ic("devices",20,"#D8A44E")}<div><h5>Design responsivo</h5><p>Funciona bem em celulares, tablets e computadores.</p></div></div>
     <div class="li">{ic("check",20,"#D8A44E")}<div><h5>Navegação simples</h5><p>Caminhos curtos e intuitivos, sem complicação.</p></div></div>
@@ -304,7 +303,7 @@ P.append(f'''
 # 5 — Jornada
 steps = [
     ("Entra no website", "Pelo link, em qualquer celular.", screen_home()),
-    ("Explora as categorias", "Doces, salgados, bolos e mais.", screen_categories()),
+    ("Explora as categorias", "Bolos, tortas, folhados e mais.", screen_categories()),
     ("Escolhe os produtos", "Fotos, descrições e preços.", screen_catalog()),
     ("Adiciona ao carrinho", "Ajusta as quantidades com facilidade.", screen_cart()),
     ("Entrega ou retirada", "Escolhe como prefere receber.", screen_checkout()),
@@ -448,6 +447,7 @@ P.append(f'''
   <div class="cl-sign">
     <img src="img/logo-v-dark.png">
     <div class="cl-contacts">
+      <span>{ic("phone",13,"#D8A44E")} +351 924 877 402 <em class="cc">(Portugal)</em></span>
       <span>{ic("insta",13,"#D8A44E")} @magnesagencia</span>
       <span>{ic("mail",13,"#D8A44E")} agenciamagnes@gmail.com</span>
     </div>

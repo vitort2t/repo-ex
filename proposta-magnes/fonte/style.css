@@ -358,3 +358,12 @@ h2.lt{color:#f4f4f4;font-size:30pt}
 .tl-s b{font-size:8.8pt}
 .tl-s span{font-size:7.6pt;line-height:1.45;color:#444}
 .pwrap{display:inline-block}
+.cc{font-style:normal;color:#8f8f8f;font-size:7pt}
+
+/* real photos */
+.cat-i img,.ci-img img,.pc-img img,.tile img{transform:none;object-position:50% 50%}
+.hero img{object-position:50% 50%}
+.hero-ov{background:linear-gradient(90deg,rgba(255,252,248,.96) 0%,rgba(255,252,248,.86) 48%,rgba(255,252,248,0) 82%)}
+.d-hero-i img{object-position:40% 55%}
+.arch img{object-position:30% 60%}
+.pc-p{white-space:nowrap}.addb{font-size:8px;padding:4px 5px}
