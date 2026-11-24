@@ -218,12 +218,18 @@ P.append(f'''
     <p class="cv-sub">Proposta de criação de website comercial com catálogo digital e pedidos via WhatsApp.</p>
   </div>
   <div class="cv-phones">
-    <div class="glow"></div>
     {phone(screen_catalog(), .7, "ph-back")}
     {phone(screen_home(), .8, "ph-front")}
     <div class="cv-ill">{ILL_D}</div>
   </div>
-  <div class="cv-sign"><span class="vr"></span><div><b>MAGNES</b><span>Agência Criativa</span></div></div>
+  <div class="cv-info">
+    <div class="ci-for"><span>Criado para</span><b>Doçuras da Ingrid</b></div>
+    <div class="ci-meta">
+      <div><span>Proposta nº</span><b>MAG-2026-011</b></div>
+      <div><span>Data</span><b>Novembro de 2026</b></div>
+      <div><span>Validade</span><b>5 dias</b></div>
+    </div>
+  </div>
   {foot(True)}
 </section>''')
 

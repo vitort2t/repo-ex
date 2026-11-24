@@ -367,3 +367,12 @@ h2.lt{color:#f4f4f4;font-size:30pt}
 .d-hero-i img{object-position:40% 55%}
 .arch img{object-position:30% 60%}
 .pc-p{white-space:nowrap}.addb{font-size:8px;padding:4px 5px}
+
+/* no drop shadow on phone mockups */
+.phone{box-shadow:0 0 0 1.5px #3a3a3a inset,0 0 0 2px #050505 !important}
+.cv-info{position:absolute;left:16mm;bottom:18mm;z-index:3;width:72mm;padding-left:4mm;border-left:.35mm solid var(--gold)}
+.ci-for span,.ci-meta span{display:block;font-size:6.2pt;letter-spacing:.3em;text-transform:uppercase;color:#9a9a9a;margin-bottom:1.2mm}
+.ci-for b{font-family:"Lust Display";font-weight:400;font-size:17pt;color:#fff;line-height:1.1}
+.ci-meta{display:flex;gap:5mm;margin-top:5mm;padding-top:4mm;border-top:.3mm solid #2e2e2e}
+.ci-meta b{font-size:7.8pt;font-weight:600;color:var(--gold);white-space:nowrap}
+.ci-meta span{white-space:nowrap;letter-spacing:.22em}.ci-meta{width:max-content;gap:7mm}
