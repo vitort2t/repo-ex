@@ -365,7 +365,7 @@ h2.lt{color:#f4f4f4;font-size:30pt}
 .hero img{object-position:50% 50%}
 .hero-ov{background:linear-gradient(90deg,rgba(255,252,248,.96) 0%,rgba(255,252,248,.86) 48%,rgba(255,252,248,0) 82%)}
 .d-hero-i img{object-position:40% 55%}
-.arch img{object-position:30% 60%}
+.arch img{object-position:0% 50%}
 .pc-p{white-space:nowrap}.addb{font-size:8px;padding:4px 5px}
 
 /* no drop shadow on phone mockups */
@@ -376,3 +376,4 @@ h2.lt{color:#f4f4f4;font-size:30pt}
 .ci-meta{display:flex;gap:5mm;margin-top:5mm;padding-top:4mm;border-top:.3mm solid #2e2e2e}
 .ci-meta b{font-size:7.8pt;font-weight:600;color:var(--gold);white-space:nowrap}
 .ci-meta span{white-space:nowrap;letter-spacing:.22em}.ci-meta{width:max-content;gap:7mm}
+.arch{box-shadow:none}
